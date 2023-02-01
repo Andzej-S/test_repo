@@ -1,12 +1,14 @@
 //https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=5&difficulty=medium
 
-var catagory = "science";
+var catagory = "history";
 var limit = "5";
 var difficulty = "medium";
 var quiz;
 var questionNumber = 0;
+var livesAmount = 3;
 var main = document.getElementById('main');
 var questions = document.getElementById('questions');
+var lives = document.getElementById('lives');
 
 $("#button1").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
@@ -39,6 +41,7 @@ $("#button1").on("click", function() {
 });
 
 function DisplayQuestion(){
+    lives.innerHTML = livesAmount;
     if(questions.classList.contains('hide')){
         questions.classList.remove('hide');
     }
@@ -79,6 +82,8 @@ function CorrectAnswer(){
 
 function WrongAnswer(){
     alert("Incorrect!");
+    livesAmount--;
+    lives.innerHTML = livesAmount;
 }
 
 function NextQuestion(){
