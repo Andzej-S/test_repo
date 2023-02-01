@@ -9,6 +9,7 @@ var livesAmount = 3;
 var main = document.getElementById('main');
 var questions = document.getElementById('questions');
 var lives = document.getElementById('lives');
+let keyword = "dog"
 
 $("#button1").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
@@ -98,3 +99,39 @@ function NextQuestion(){
 function EndQuiz(){
     //hide questions and answers, show hidden divs
 }
+
+
+function clearDiv() {
+    try {
+        $("#divGiphy").remove();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+$("#button10").on("click", function() {
+    let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
+    $.ajax({
+      url: queryUrlGiphy,
+      method: "GET"
+    })
+      .then(function(response) {
+        // clear div container with the gif
+        clearDiv();
+
+        // create new div container
+        let divGiphy = $("<div/>")    
+        divGiphy.attr("id", "divGiphy")
+        divGiphy.appendTo("body");     
+        
+        $("<img/>", {
+            // get a random image from the search result
+            src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
+            alt: keyword,
+            class: "giphyImg"
+        }).appendTo(divGiphy);
+
+      });
+   
+    });
+
