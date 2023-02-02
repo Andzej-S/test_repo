@@ -2,3 +2,42 @@
     margin: 0;
     padding: 0;
 }
+
+.container {
+    border-style: solid;
+    border-width: 1px;
+    padding: 10px;
+}
+
+#question-title {
+    border-style: solid;
+    border-width: 1px;
+    min-height: 2.5rem;
+}
+
+.choices {
+    border-style: solid;
+    border-width: 1px;
+    min-height: 15rem;
+}
+
+.lives {
+    border-style: solid;
+    border-width: 1px;
+    min-height: 2.5rem;
+}
+
+.hints {
+    border-style: solid;
+    border-width: 1px;
+}
+
+span {
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 1px;
+    height: 1.2rem;
+    width: 5rem;
+    display: inline-block;
+    vertical-align: middle;
+  }

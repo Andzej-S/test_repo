@@ -67,18 +67,110 @@
     </div>
   </header>
 
-  <!-- MAIN SECTION -->
   
-  <div id="main">
-    <button type="button" id ="button1" class="btn btn-primary" class="main" >Start Quiz</button>
-    <p id="lives" class="lives"></p>
-  </div>
+  <!-- MAIN SECTION -->
+  <div class ="wrapper hide">
 
-  <div id="questions" class="hide">
-    <h1 id="question-title" data-text="" class="hide">Question Title</h1>
-    <div id="choices" class="choices"></div>
-    <button type="button" id = "button2" class="btn btn-primary">Tell me the answer, fool</button>
+    <!-- Container that holds category, difficulty level and play button -->
+    <div class="container hide">
+      <div class="row">
+        
+        <!--Column that holds category dropdown -->
+        <div class="col col-lg-4">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Category</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            <option value="4">Four</option>
+            <option value="5">Five</option>
+          </select>
+        </div>
+        
+        <!--Column that holds difficulty dropdown -->
+        <div class="col col-lg-4">
+          <select class="form-select" aria-label="Default select example">
+            <option selected>Difficulty level</option>
+            <option value="1">Easy</option>
+            <option value="2">Medium</option>
+            <option value="3">Hard</option>
+          </select>
+        </div>
+        
+        <!-- Play button -->
+        <div class="col col-lg-4 text-center">
+          <button type="button" id="play-button" class="btn btn-primary" class="main">Play!</button>
+        </div>
+      </div>
+    </div>
+    <!-- End of container that holds category, difficulty level and play button -->
+
+
+    <!-- Container that holds quiz and hint buttons -->
+    <div class="container hide">
+      <div class="row">
+        <div class="col col-lg-8">
+
+          <!-- Question to be displayed here -->
+          <h3 id="question-title"></h3>
+        </div>
+        <div class="col col-lg-4 text-center">
+          <h3>Click for a hint</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-lg-8">
+          <!-- Choices to be displayed here -->
+          <div class="choices"></div>
+        </div>
+
+        <!-- Hint buttons -->
+        <div class="col col-lg-4 justify-content-center align-items-center d-flex hints">
+          <button type="button" id ="hint1" class="btn btn-primary" class="main" >Hint 1</button>
+          <button type="button" id ="hint2" class="btn btn-primary" class="main" >Hint 2</button>
+          <button type="button" id ="hint3" class="btn btn-primary" class="main" >Hint 3</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-lg-8">
+          <!-- Lives to be displayed here -->
+          <p>Lives <span id="lives" class="lives"></span></p>
+        </div>
+
+        <div class="col col-lg-4">
+        <!-- Empty div to keep column sizes in line with other rows -->
+        </div>
+      </div>
+    </div>
+    <!-- End of container that holds quiz and hint buttons -->
+    
+
+    <!-- Container that holds wins, losses, win ratio and next button -->
+    <div class="container hide">
+      <div class="row text-center">
+        <div class="col col-lg-4">
+
+          <!-- Span holds win numbers -->
+          <p>Wins <span id="wins"></span></p>
+        </div>
+        <div class="col col-lg-4">
+
+          <!-- Span holds loss numbers -->
+          <p>Loses <span id="loses"></span></p>
+        </div>
+        <div class="col col-lg-4">
+
+          <!-- Span holds win ratio percentage -->
+          <p>Win ratio <span id="win-ratio"></span></p>
+        </div>
+      </div>
+    </div>
+    <!-- End of container that holds wins, losses, win ratio and next button -->
+
   </div>
+  <!-- END MAIN SECTION -->
 
 
   <!-- FOOTER SECTION -->

@@ -10,7 +10,7 @@ var main = document.getElementById('main');
 var questions = document.getElementById('questions');
 var lives = document.getElementById('lives');
 
-$("#button1").on("click", function() {
+$("#play-button").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
   
     $.ajax({
@@ -20,7 +20,7 @@ $("#button1").on("click", function() {
       .then(function(response) {
         quiz = response;
         console.log(response);
-        $("#button1").html("Quiz Started!");
+        $("#play-button").html("Quiz Started!");
         if(main.classList.contains('hide')){
             main.classList.remove('hide');
         }
