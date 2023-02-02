@@ -1,18 +1,22 @@
 //https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=5&difficulty=medium
 
 var catagory = "history";
-var limit = "5";
 var difficulty = "medium";
 var quiz;
 var questionNumber = 0;
 var livesAmount = 3;
 var main = document.getElementById('main');
 var questions = document.getElementById('questions');
+var scoreElement = document.getElementById('score');
 var lives = document.getElementById('lives');
+var submitBtn = document.getElementById('submit');
+var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
+var limit = score.length;
+var newScore = 0;
 
 $("#button1").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
-  
+    
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -41,6 +45,8 @@ $("#button1").on("click", function() {
 });
 
 function DisplayQuestion(){
+    newScore = score[questionNumber];
+    scoreElement.textContent = newScore;
     lives.innerHTML = livesAmount;
     if(questions.classList.contains('hide')){
         questions.classList.remove('hide');
@@ -77,11 +83,17 @@ function DisplayQuestion(){
 
 function CorrectAnswer(){
     alert("Correct!");
+    newScore = score[questionNumber + 1];
+    scoreElement.textContent = newScore;
+    console.log(newScore);
 }
 
 
 function WrongAnswer(){
     alert("Incorrect!");
+    if(livesAmount <= 1){
+      EndQuiz();
+    }
     livesAmount--;
     lives.innerHTML = livesAmount;
 }
@@ -93,8 +105,31 @@ function NextQuestion(){
     }
     else
         EndQuiz();
-    }
+}
 
 function EndQuiz(){
     //hide questions and answers, show hidden divs
+    alert("you lost the quiz!");
+    submitBtn.addEventListener("click", saveScore());
 }
+
+function saveScore(){
+  submitBtn.onclick = function(){
+    // Grab the value of the 'initials' element
+    var initials = document.getElementById('initials').value;
+    // Create a new object with the current score and the initials
+    var newScores = {
+        "score" : newScore,
+        "initials" : initials
+    }
+    // get existing data from local storage
+    var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
+    // add new score to existing data
+    existingScores.push(newScores);
+    // save updated data to local storage
+    localStorage.setItem("newScores", JSON.stringify(existingScores));
+    console.log(localStorage.getItem('newScores'));
+  }
+
+}
+

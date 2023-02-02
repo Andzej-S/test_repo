@@ -57,7 +57,7 @@
               </div>
             </div><!-- /lc-block -->
             <div class="lc-block">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Let's start</a>
+              <a class="btn btn-primary btn-lg" href="#" id="button1" role="button">Let's start</a>
             </div><!-- /lc-block -->
           </div>
         </div><!-- /col -->
@@ -69,14 +69,18 @@
   <!-- MAIN SECTION -->
   
   <div id="main">
-    <button type="button" id ="button1" class="btn btn-primary" class="main" >Start Quiz</button>
-    <p id="lives" class="lives"></p>
+    <p id="lives" class="lives">Lives</p>
+    <p id="score" class="score">Score</p>
   </div>
 
   <div id="questions" class="hide">
     <h1 id="question-title" data-text="" class="hide">Question Title</h1>
     <div id="choices" class="choices"></div>
     <button type="button" id = "button2" class="btn btn-primary">Tell me the answer, fool</button>
+    <p>
+      Enter initials: <input type="text" id="initials" max="99"/>
+      <button id="submit">Submit</button>
+    </p>
   </div>
 
   <!-- FOOTER SECTION -->
