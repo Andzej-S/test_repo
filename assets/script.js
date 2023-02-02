@@ -143,7 +143,7 @@ function clearDiv() {
     }
 }
 
-$("#hint1").on("click", function() {
+$("#gif-hint").on("click", function() {
     let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
   
     $.ajax({
