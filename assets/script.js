@@ -111,6 +111,7 @@ function clearDiv() {
 
 $("#button10").on("click", function() {
     let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
+  
     $.ajax({
       url: queryUrlGiphy,
       method: "GET"
@@ -131,7 +132,19 @@ $("#button10").on("click", function() {
             class: "giphyImg"
         }).appendTo(divGiphy);
 
-      });
+        // create modal
+        $( function() {
+            $( "#divGiphy" ).dialog({
+              modal: true,
+              buttons: {
+                Ok: function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+        });   
+
+      }); //end of .then
    
-    });
+}); //end of button event
 
