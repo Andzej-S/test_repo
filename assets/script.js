@@ -5,7 +5,7 @@ var difficulty = "medium";
 var quiz;
 var questionNumber = 0;
 var livesAmount = 3;
-var main = document.getElementById('main');
+//var main = document.getElementById('main');
 var questions = document.getElementById('questions');
 var scoreElement = document.getElementById('score');
 var lives = document.getElementById('lives');
@@ -25,13 +25,13 @@ $("#play-button").on("click", function() {
         quiz = response;
         console.log(response);
         $("#play-button").html("Quiz Started!");
-        if(main.classList.contains('hide')){
+        /*if(main.classList.contains('hide')){
             main.classList.remove('hide');
         }
         else
         {
             main.classList.add('hide')
-        }
+        }*/
         // hide main div, show questions
         DisplayQuestion();
       });
@@ -48,9 +48,9 @@ function DisplayQuestion(){
     newScore = score[questionNumber];
     scoreElement.textContent = newScore;
     lives.innerHTML = livesAmount;
-    if(questions.classList.contains('hide')){
+    /*if(questions.classList.contains('hide')){
         questions.classList.remove('hide');
-    }
+    }*/
     var allAnswers = [];
     choices.innerHTML = "";
     document.getElementById("question-title").innerHTML = quiz[questionNumber].question;
