@@ -13,6 +13,7 @@ var submitBtn = document.getElementById('submit');
 var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
 var limit = score.length;
 var newScore = 0;
+let keyword = "dog"
 
 $("#play-button").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
@@ -132,4 +133,52 @@ function saveScore(){
   }
 
 }
+
+
+function clearDiv() {
+    try {
+        $("#divGiphy").remove();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+$("#hint1").on("click", function() {
+    let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
+  
+    $.ajax({
+      url: queryUrlGiphy,
+      method: "GET"
+    })
+      .then(function(response) {
+        // clear div container with the gif
+        clearDiv();
+
+        // create new div container
+        let divGiphy = $("<div/>")    
+        divGiphy.attr("id", "divGiphy")
+        divGiphy.appendTo("body");     
+        
+        $("<img/>", {
+            // get a random image from the search result
+            src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
+            alt: keyword,
+            class: "giphyImg"
+        }).appendTo(divGiphy);
+
+        // create modal
+        $( function() {
+            $( "#divGiphy" ).dialog({
+              modal: true,
+              buttons: {
+                Ok: function() {
+                  $( this ).dialog( "close" );
+                }
+              }
+            });
+        });   
+
+      }); //end of .then
+   
+}); //end of button event
 
