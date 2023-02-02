@@ -58,16 +58,15 @@
               </div>
             </div><!-- /lc-block -->
             <div class="lc-block">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Let's start</a>
+              <a class="btn btn-primary btn-lg" href="#" id="button1" role="button">Let's start</a>
             </div><!-- /lc-block -->
           </div>
         </div><!-- /col -->
-    
+        
       </div>
     </div>
   </header>
 
-  
   <!-- MAIN SECTION -->
   <div class ="wrapper hide">
 
@@ -122,7 +121,11 @@
       <div class="row">
         <div class="col col-lg-8">
           <!-- Choices to be displayed here -->
-          <div class="choices"></div>
+          <div class="choices hide" id="choices"></div>
+          <p class="hide" id="submitInitials">
+            Enter initials: <input type="text" id="initials" max="99"/>
+            <button id="submit">Submit</button>
+          </p>
         </div>
 
         <!-- Hint buttons -->
@@ -130,6 +133,7 @@
           <button type="button" id ="hint1" class="btn btn-primary" class="main" >Hint 1</button>
           <button type="button" id ="hint2" class="btn btn-primary" class="main" >Hint 2</button>
           <button type="button" id ="hint3" class="btn btn-primary" class="main" >Hint 3</button>
+          <button type="button" id = "button2" class="btn btn-primary">Tell me the answer, fool</button>
         </div>
       </div>
 
@@ -137,6 +141,8 @@
         <div class="col col-lg-8">
           <!-- Lives to be displayed here -->
           <p>Lives <span id="lives" class="lives"></span></p>
+          <p>score <span id="score" class="score"></span></p>
+          
         </div>
 
         <div class="col col-lg-4">
@@ -165,10 +171,10 @@
           <!-- Span holds win ratio percentage -->
           <p>Win ratio <span id="win-ratio"></span></p>
         </div>
+        
       </div>
     </div>
     <!-- End of container that holds wins, losses, win ratio and next button -->
-
   </div>
   <!-- END MAIN SECTION -->
 
