@@ -14,7 +14,7 @@ var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
 var limit = score.length;
 var newScore = 0;
 
-$("#button1").on("click", function() {
+$("#play-button").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
     
     $.ajax({
@@ -24,7 +24,7 @@ $("#button1").on("click", function() {
       .then(function(response) {
         quiz = response;
         console.log(response);
-        $("#button1").html("Quiz Started!");
+        $("#play-button").html("Quiz Started!");
         if(main.classList.contains('hide')){
             main.classList.remove('hide');
         }
