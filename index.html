@@ -131,25 +131,12 @@
 
         <!-- Hint buttons -->
         <div class="col col-lg-4 justify-content-center align-items-center d-flex hints">
-          <button type="button" id ="hint1" class="btn btn-primary" class="main" >Hint 1</button>
-          <button type="button" id ="hint2" class="btn btn-primary" class="main" >Hint 2</button>
-          <button type="button" id ="hint3" class="btn btn-primary" class="main" >Hint 3</button>
+          <button type="button" id ="gif-hint" class="btn btn-primary" class="main" >GIF hint</button>
+          <button type="button" id ="fifty-fifty" class="btn btn-primary" class="main" >50 / 50</button>
           <button type="button" id = "button2" class="btn btn-primary">Tell me the answer, fool</button>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col col-lg-8">
-          <!-- Lives to be displayed here -->
-          <p>Lives <span id="lives" class="lives"></span></p>
-          <p>score <span id="score" class="score"></span></p>
-          
-        </div>
-
-        <div class="col col-lg-4">
-        <!-- Empty div to keep column sizes in line with other rows -->
-        </div>
-      </div>
     </div>
     <!-- End of container that holds quiz and hint buttons -->
     
@@ -158,19 +145,17 @@
     <div class="container hide">
       <div class="row text-center">
         <div class="col col-lg-4">
-
-          <!-- Span holds win numbers -->
-          <p>Wins <span id="wins"></span></p>
+          <!-- Empty div -->
         </div>
-        <div class="col col-lg-4">
+        <div class="col col-lg-4 d-flex">
 
-          <!-- Span holds loss numbers -->
-          <p>Loses <span id="loses"></span></p>
+          <!-- Span holds lives and score -->
+          <p class="mx-5">Lives <span id="lives" class="lives"></span></p>
+          <p class="mx-5">Score <span id="score" class="score"></span></p>
         </div>
+        
         <div class="col col-lg-4">
-
-          <!-- Span holds win ratio percentage -->
-          <p>Win ratio <span id="win-ratio"></span></p>
+          <!-- Empty div -->
         </div>
         
       </div>
