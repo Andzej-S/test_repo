@@ -1,7 +1,5 @@
 //https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=5&difficulty=medium
 
-var catagory = "history";
-var difficulty = "medium";
 var quiz;
 var questionNumber = 0;
 var livesAmount = 3;
@@ -16,7 +14,18 @@ var newScore = 0;
 let keyword = "dog"
 
 $("#play-button").on("click", function() {
-    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
+    var categorySelect = document.getElementById('category');
+    var categoryValue = categorySelect.value;
+    var difficulty = document.getElementById('difficulty');
+    var difficultyValue = difficulty.value;
+
+    if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
+        console.log("Please select a category and difficulty!");
+        return;
+    }
+
+
+    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
     
     $.ajax({
       url: queryURL,
