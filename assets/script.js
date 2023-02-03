@@ -15,6 +15,7 @@ var limit = score.length;
 var newScore = 0;
 let keyword = "dog";
 let fiftyCount = 1;
+let hintCount = 1;
 
 $("#play-button").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
@@ -179,40 +180,44 @@ function clearDiv() {
 
 $("#hint").on("click", function() {
     let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
-  
-    $.ajax({
-      url: queryUrlGiphy,
-      method: "GET"
-    })
-      .then(function(response) {
-        // clear div container with the gif
-        clearDiv();
+    if (hintCount === 1){
+        $.ajax({
+        url: queryUrlGiphy,
+        method: "GET"
+        })
+        .then(function(response) {
+            // clear div container with the gif
+            clearDiv();
 
-        // create new div container
-        let divGiphy = $("<div/>")    
-        divGiphy.attr("id", "divGiphy")
-        divGiphy.appendTo("body");     
-        
-        $("<img/>", {
-            // get a random image from the search result
-            src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
-            alt: keyword,
-            class: "giphyImg"
-        }).appendTo(divGiphy);
+            // create new div container
+            let divGiphy = $("<div/>")    
+            divGiphy.attr("id", "divGiphy")
+            divGiphy.appendTo("body");     
+            
+            $("<img/>", {
+                // get a random image from the search result
+                src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
+                alt: keyword,
+                class: "giphyImg"
+            }).appendTo(divGiphy);
 
-        // create modal
-        $( function() {
-            $( "#divGiphy" ).dialog({
-              modal: true,
-              buttons: {
-                Ok: function() {
-                  $( this ).dialog( "close" );
+            // create modal
+            $( function() {
+                $( "#divGiphy" ).dialog({
+                modal: true,
+                buttons: {
+                    Ok: function() {
+                    $( this ).dialog( "close" );
+                    }
                 }
-              }
-            });
-        });   
+                });
+            });   
+            $("#hint").addClass("btn-secondary")
+        }); //end of .then
+    }else{
+        console.log("hint unavailable")
+    }
 
-      }); //end of .then
    
 }); //end of button event
 
