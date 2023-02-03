@@ -13,7 +13,8 @@ var submitBtn = document.getElementById('submit');
 var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
 var limit = score.length;
 var newScore = 0;
-let keyword = "dog"
+let keyword = "dog";
+let fiftyCount = 1;
 
 $("#play-button").on("click", function() {
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
@@ -45,7 +46,16 @@ $("#play-button").on("click", function() {
 
 });
 
-function DisplayQuestion(){
+function findElementByText(text) {
+    let jSpot = $("button:contains("+ text +")");
+    if ($(jSpot).html() == text) {
+        $(jSpot).html(`<del>${text}</del>`);
+    }      
+    
+}
+
+
+function DisplayQuestion(){    
     newScore = score[questionNumber];
     scoreElement.textContent = newScore;
     lives.innerHTML = livesAmount;
@@ -80,7 +90,28 @@ function DisplayQuestion(){
             })
         }
     }
-}
+
+    // add event listener to 50/50 btn
+    $("#fifty-fifty").on("click", function(){        
+        let arr = []; // select 2 wrong answers 
+
+        for (let j=0; j<2; j++){
+            arr.push(quiz[questionNumber].incorrectAnswers[j])
+        }
+
+        if (fiftyCount === 1){
+            console.log(arr)
+            arr.forEach(element => {       
+                findElementByText(element);
+            })
+        }else {
+            console.log("help disabled")
+        }
+        fiftyCount--;
+        $("#fifty-fifty").addClass("btn-secondary")
+    });
+} // end of DisplayQuestion()
+
 
 function CorrectAnswer(){
     alert("Correct!");
@@ -99,6 +130,7 @@ function WrongAnswer(){
     lives.innerHTML = livesAmount;
 }
 
+
 function NextQuestion(){
     questionNumber++
     if(questionNumber < limit){
@@ -108,11 +140,13 @@ function NextQuestion(){
         EndQuiz();
 }
 
+
 function EndQuiz(){
     //hide questions and answers, show hidden divs
     alert("you lost the quiz!");
     submitBtn.addEventListener("click", saveScore());
 }
+
 
 function saveScore(){
   submitBtn.onclick = function(){
@@ -143,7 +177,7 @@ function clearDiv() {
     }
 }
 
-$("#gif-hint").on("click", function() {
+$("#hint").on("click", function() {
     let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
   
     $.ajax({
