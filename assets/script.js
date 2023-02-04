@@ -1,18 +1,34 @@
 //https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=5&difficulty=medium
 
-var catagory = "history";
-var limit = "5";
-var difficulty = "medium";
 var quiz;
 var questionNumber = 0;
 var livesAmount = 3;
-var main = document.getElementById('main');
+//var main = document.getElementById('main');
 var questions = document.getElementById('questions');
+var scoreElement = document.getElementById('score');
 var lives = document.getElementById('lives');
+var submitBtn = document.getElementById('submit');
+var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
+var limit = score.length;
+var newScore = 0;
+let keyword = "dog";
+let fiftyCount = 1;
+let hintCount = 1;
 
-$("#button1").on("click", function() {
-    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
-  
+$("#play-button").on("click", function() {
+    var categorySelect = document.getElementById('category');
+    var categoryValue = categorySelect.value;
+    var difficulty = document.getElementById('difficulty');
+    var difficultyValue = difficulty.value;
+
+    if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
+        console.log("Please select a category and difficulty!");
+        return;
+    }
+
+
+    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
+    
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -20,14 +36,14 @@ $("#button1").on("click", function() {
       .then(function(response) {
         quiz = response;
         console.log(response);
-        $("#button1").html("Quiz Started!");
-        if(main.classList.contains('hide')){
+        $("#play-button").html("Quiz Started!");
+        /*if(main.classList.contains('hide')){
             main.classList.remove('hide');
         }
         else
         {
             main.classList.add('hide')
-        }
+        }*/
         // hide main div, show questions
         DisplayQuestion();
       });
@@ -60,9 +76,12 @@ function DisplayQuestion(){
     choices.innerHTML = "";
     document.getElementById("question-title").innerHTML = quiz[questionNumber].question;
 
-    let allAnswers = [];
-    allAnswers = [...collector[index].incorrectAnswers];
-    allAnswers.push(collector[index].correctAnswer);
+    // loop through each incorrect answer and add to array
+    for (var i = 0; i < quiz[questionNumber].incorrectAnswers.length; i++){
+        allAnswers.push(quiz[questionNumber].incorrectAnswers[i]); // push incorrect answers to array
+    }
+
+    allAnswers.push(quiz[questionNumber].correctAnswer); // push correct answer to array
     allAnswers.sort(() => Math.random() - 0.5);
     
     for (var i = 0; i < allAnswers.length; i++){
@@ -159,7 +178,7 @@ function saveScore(){
 
 }
 
-
+// clear old gif from div tag
 function clearDiv() {
     try {
         $("#divGiphy").remove();
@@ -168,6 +187,7 @@ function clearDiv() {
     }
 }
 
+// hint btn add event listener
 $("#hint").on("click", function() {
     let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
     if (hintCount === 1){
@@ -210,4 +230,26 @@ $("#hint").on("click", function() {
 
    
 }); //end of button event
+
+
+// create How to play modal
+$( function() {
+    $( "#dialogHelp" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 500
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      },
+      width: 305,
+      height: 190,
+    });
+ 
+    $( "#help" ).on( "click", function() {
+      $( "#dialogHelp" ).dialog( "open" );
+    });
+});
 
