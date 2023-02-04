@@ -1,42 +1,213 @@
-let index = 0;
-let limit = 4;
-let queryURL = `https://the-trivia-api.com/api/questions?limit=${limit}&categories=science,history`;
+//https://the-trivia-api.com/api/questions?categories=arts_and_literature&limit=5&difficulty=medium
 
-$.ajax({
-  url: queryURL,
-  method: "GET"
-}).then(function (response) {
-  $("#button1").on("click", function () {
-    index++;
-    $(".question").text("");
-    $(".answer").text("");
-    drawQuestion(response, index);
-  });
-  console.log(response);
-  drawQuestion(response, index);
+var catagory = "history";
+var limit = "5";
+var difficulty = "medium";
+var quiz;
+var questionNumber = 0;
+var livesAmount = 3;
+var main = document.getElementById('main');
+var questions = document.getElementById('questions');
+var lives = document.getElementById('lives');
+
+$("#button1").on("click", function() {
+    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + catagory + "&limit=" + limit + "&difficulty=" + difficulty;
+  
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      .then(function(response) {
+        quiz = response;
+        console.log(response);
+        $("#button1").html("Quiz Started!");
+        if(main.classList.contains('hide')){
+            main.classList.remove('hide');
+        }
+        else
+        {
+            main.classList.add('hide')
+        }
+        // hide main div, show questions
+        DisplayQuestion();
+      });
+      $("#button2").on("click", function() {
+        console.log("The answer to the question is : " + quiz[questionNumber].correctAnswer);
+        if (questionNumber >= quiz.length){
+            console.log("quiz finished");
+        }
+    })
+
 });
 
-function drawQuestion(collector, index) {
-  if (index < limit) {
-    $("<h3/>", {
-      class: "question",
-      html: collector[index].question
-    }).appendTo("body");
+function findElementByText(text) {
+    let jSpot = $("button:contains("+ text +")");
+    if ($(jSpot).html() == text) {
+        $(jSpot).html(`<del>${text}</del>`);
+    }      
+    
+}
+
+
+function DisplayQuestion(){    
+    newScore = score[questionNumber];
+    scoreElement.textContent = newScore;
+    lives.innerHTML = livesAmount;
+    /*if(questions.classList.contains('hide')){
+        questions.classList.remove('hide');
+    }*/
+    var allAnswers = [];
+    choices.innerHTML = "";
+    document.getElementById("question-title").innerHTML = quiz[questionNumber].question;
 
     let allAnswers = [];
     allAnswers = [...collector[index].incorrectAnswers];
     allAnswers.push(collector[index].correctAnswer);
     allAnswers.sort(() => Math.random() - 0.5);
+    
+    for (var i = 0; i < allAnswers.length; i++){
+        var choiceBtn = document.createElement("button");
+        choiceBtn.textContent = allAnswers[i];
+        choices.appendChild(choiceBtn);
+        if(quiz[questionNumber].correctAnswer == allAnswers[i]){
+            $(choiceBtn).on("click", function() {
+                CorrectAnswer();
+                NextQuestion();
+            })
+        }
+        else{
+            $(choiceBtn).on("click", function() {
+                WrongAnswer();
+            })
+        }
+    }
 
-    allAnswers.forEach(function (element) {
-      $("<h5/>", {
-        class: "answer",
-        html: element
-      }).appendTo("body");
+    // add event listener to 50/50 btn
+    $("#fifty-fifty").on("click", function(){        
+        let arr = []; // select 2 wrong answers 
+
+        for (let j=0; j<2; j++){
+            arr.push(quiz[questionNumber].incorrectAnswers[j])
+        }
+
+        if (fiftyCount === 1){
+            console.log(arr)
+            arr.forEach(element => {       
+                findElementByText(element);
+            })
+        }else {
+            console.log("help disabled")
+        }
+        fiftyCount--;
+        $("#fifty-fifty").addClass("btn-secondary")
     });
+} // end of DisplayQuestion()
 
-    console.log(allAnswers);
-  } else {
-    console.log("Questions finished");
-  }
+
+function CorrectAnswer(){
+    alert("Correct!");
+    newScore = score[questionNumber + 1];
+    scoreElement.textContent = newScore;
+    console.log(newScore);
 }
+
+
+function WrongAnswer(){
+    alert("Incorrect!");
+    if(livesAmount <= 1){
+      EndQuiz();
+    }
+    livesAmount--;
+    lives.innerHTML = livesAmount;
+}
+
+
+function NextQuestion(){
+    questionNumber++
+    if(questionNumber < limit){
+        DisplayQuestion();
+    }
+    else
+        EndQuiz();
+}
+
+
+function EndQuiz(){
+    //hide questions and answers, show hidden divs
+    alert("you lost the quiz!");
+    submitBtn.addEventListener("click", saveScore());
+}
+
+
+function saveScore(){
+  submitBtn.onclick = function(){
+    // Grab the value of the 'initials' element
+    var initials = document.getElementById('initials').value;
+    // Create a new object with the current score and the initials
+    var newScores = {
+        "score" : newScore,
+        "initials" : initials
+    }
+    // get existing data from local storage
+    var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
+    // add new score to existing data
+    existingScores.push(newScores);
+    // save updated data to local storage
+    localStorage.setItem("newScores", JSON.stringify(existingScores));
+    console.log(localStorage.getItem('newScores'));
+  }
+
+}
+
+
+function clearDiv() {
+    try {
+        $("#divGiphy").remove();
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+$("#hint").on("click", function() {
+    let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
+    if (hintCount === 1){
+        $.ajax({
+        url: queryUrlGiphy,
+        method: "GET"
+        })
+        .then(function(response) {
+            // clear div container with the gif
+            clearDiv();
+
+            // create new div container
+            let divGiphy = $("<div/>")    
+            divGiphy.attr("id", "divGiphy")
+            divGiphy.appendTo("body");     
+            
+            $("<img/>", {
+                // get a random image from the search result
+                src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
+                alt: keyword,
+                class: "giphyImg"
+            }).appendTo(divGiphy);
+
+            // create modal
+            $( function() {
+                $( "#divGiphy" ).dialog({
+                modal: true,
+                buttons: {
+                    Ok: function() {
+                    $( this ).dialog( "close" );
+                    }
+                }
+                });
+            });   
+            $("#hint").addClass("btn-secondary")
+        }); //end of .then
+    }else{
+        console.log("hint unavailable")
+    }
+
+   
+}); //end of button event
+

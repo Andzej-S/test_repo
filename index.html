@@ -8,7 +8,9 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">    
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link href="./assets/style.css" rel="stylesheet">
+  <link href="design.css" rel="stylesheet"><!-- Linked to design css file -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   <title>Trivia quiz game</title>
 
 </head>
@@ -57,30 +59,163 @@
               </div>
             </div><!-- /lc-block -->
             <div class="lc-block">
-              <a class="btn btn-primary btn-lg" href="#" role="button">Let's start</a>
+              <a class="btn btn-primary btn-lg" href="#" id="button1" role="button">Let's start</a>
             </div><!-- /lc-block -->
           </div>
         </div><!-- /col -->
-    
+        
       </div>
     </div>
   </header>
 
   <!-- MAIN SECTION -->
-  
-  <div id="main">
-    <button type="button" id ="button1" class="btn btn-primary" class="main" >Start Quiz</button>
-    <p id="lives" class="lives"></p>
-  </div>
+  <div class ="wrapper hide">
 
-  <div id="questions" class="hide">
-    <h1 id="question-title" data-text="" class="hide">Question Title</h1>
-    <div id="choices" class="choices"></div>
-    <button type="button" id = "button2" class="btn btn-primary">Tell me the answer, fool</button>
+    <!-- Container that holds category, difficulty level and play button -->
+    <div class="container hide">
+      <div class="row">
+        
+        <!--Column that holds category dropdown -->
+        <div class="col col-lg-4">
+          <select class="form-select"  id="category" aria-label="Default select example">
+            <option selected>Category</option>  
+            <option value="history">History</option>
+            <option value="science">Science</option>
+            <option value="geography">Geography</option>
+            <option value="general_knowledge">General Knowledge</option>
+            <option value="arts_and_literature">Arts & Literature</option>
+          </select>
+        </div>
+        
+        <!--Column that holds difficulty dropdown -->
+        <div class="col col-lg-4">
+          <select class="form-select" id="difficulty" aria-label="Default select example">
+            <option selected>Difficulty level</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        
+        <!-- Play button -->
+        <div class="col col-lg-4 text-center">
+          <button type="button" id="play-button" class="btn btn-primary" class="main">Play!</button>
+        </div>
+      </div>
+    </div>
+    <!-- End of container that holds category, difficulty level and play button -->
+
+
+    <!-- Container that holds quiz and hint buttons -->
+    <div class="container hide">
+      <div class="row">
+        <div class="col col-lg-8">
+
+          <!-- Question to be displayed here -->
+          <h3 id="question-title"></h3>
+        </div>
+        <div class="col col-lg-4 text-center">
+          <h3>Click for a hint</h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col col-lg-8">
+          <!-- Choices to be displayed here -->
+          <div class="choices hide" id="choices"></div>
+          <p class="hide" id="submitInitials">
+            Enter initials: <input type="text" id="initials" max="99"/>
+            <button id="submit">Submit</button>
+          </p>
+        </div>
+
+        <!-- Hint buttons -->
+        <div class="col col-lg-4 justify-content-center align-items-center d-flex hints">
+          <button type="button" id ="hint" class="main btn btn-primary">Hint</button>
+          <button type="button" id ="fifty-fifty" class="main btn btn-primary">50/50</button>
+          <button type="button" id = "button2" class="btn btn-primary">Tell me the answer, fool</button>
+        </div>
+      </div>
+
+    </div>
+    <!-- End of container that holds quiz and hint buttons -->
+    
+
+    <!-- Container that holds wins, losses, win ratio and next button -->
+    <div class="container hide">
+      <div class="row text-center">
+        <div class="col col-lg-4">
+          <!-- Empty div -->
+        </div>
+        <div class="col col-lg-4 d-flex">
+
+          <!-- Span holds lives and score -->
+          <p class="mx-5">Lives <span id="lives" class="lives"></span></p>
+          <p class="mx-5">Score <span id="score" class="score"></span></p>
+        </div>
+        
+        <div class="col col-lg-4">
+          <!-- Empty div -->
+        </div>
+        
+      </div>
+    </div>
+    <!-- End of container that holds wins, losses, win ratio and next button -->
   </div>
+  <!-- END MAIN SECTION -->
+
 
   <!-- FOOTER SECTION -->
   
+<div class="footer">
+  <div class="col-1">
+    <h3>About Us</h3>
+    <p>Zombie ipsum reversus ab viral inferno, nam rick grimes. De carne lumbering animata quaeritis. </p>
+    <br>
+      <a href="placeholder">About |</a>
+      <a href="placeholder">Contact |</a>
+      <a href="placeholder">FAQ |</a>
+      <a href="placeholder">Resources |</a>
+      <a href="placeholder">Special Thanks</a>
+
+      <div class="copyright">
+        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Team 4</p>
+      </div>
+
+
+  </div>
+
+  <div class="col-2">
+    <h3>Newsletter</h3>
+    <form>
+      <input type="email" placeholder="Your Email Address" required>
+    </br>
+      <button type="submit">SUBSCRIBE NOW</button>
+    </form>
+  </div>
+  
+  <div class="col-3">
+    <h3>Contact</h3>
+    <p>Want to collaborate:</p>
+    <div class="social-icons">
+      <a href="https://github.com/Andzej-S">
+      <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
+      </a>
+      <a href="https://github.com/DavidHJolley">
+        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
+        </a>
+        <a href="https://github.com/georgeboholteanu">
+        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
+        </a>
+        <a href="https://github.com/TahminaHannan">
+        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
+        </a>
+  </div>
+
+
+</div>
+
+
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
