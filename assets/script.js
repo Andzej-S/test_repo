@@ -11,7 +11,6 @@ var submitBtn = document.getElementById('submit');
 var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
 var limit = score.length;
 var newScore = 0;
-let keyword = "dog";
 let fiftyCount = 1;
 let hintCount = 1;
 
@@ -120,6 +119,52 @@ function DisplayQuestion(){
         fiftyCount--;
         $("#fifty-fifty").addClass("btn-secondary")
     });
+
+    // hint btn add event listener
+    $("#hint").on("click", function() {
+        let keyword = quiz[questionNumber].correctAnswer;
+        let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
+        if (hintCount === 1){
+            $.ajax({
+            url: queryUrlGiphy,
+            method: "GET"
+            })
+            .then(function(response) {
+                // clear div container with the gif
+                clearDiv();
+
+                // create new div container
+                let divGiphy = $("<div/>")    
+                divGiphy.attr("id", "divGiphy")
+                divGiphy.appendTo("body");     
+                
+                $("<img/>", {
+                    // get a random image from the search result
+                    src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
+                    alt: keyword,
+                    class: "giphyImg"
+                }).appendTo(divGiphy);
+
+                // create modal
+                $( function() {
+                    $( "#divGiphy" ).dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function() {
+                        $( this ).dialog( "close" );
+                        }
+                    }
+                    });
+                });   
+                $("#hint").addClass("btn-secondary")
+            }); //end of .then
+        }else{
+            console.log("hint unavailable")
+        }
+
+    
+    }); //end of button event
+
 } // end of DisplayQuestion()
 
 
@@ -186,50 +231,6 @@ function clearDiv() {
         console.log(error)
     }
 }
-
-// hint btn add event listener
-$("#hint").on("click", function() {
-    let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
-    if (hintCount === 1){
-        $.ajax({
-        url: queryUrlGiphy,
-        method: "GET"
-        })
-        .then(function(response) {
-            // clear div container with the gif
-            clearDiv();
-
-            // create new div container
-            let divGiphy = $("<div/>")    
-            divGiphy.attr("id", "divGiphy")
-            divGiphy.appendTo("body");     
-            
-            $("<img/>", {
-                // get a random image from the search result
-                src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
-                alt: keyword,
-                class: "giphyImg"
-            }).appendTo(divGiphy);
-
-            // create modal
-            $( function() {
-                $( "#divGiphy" ).dialog({
-                modal: true,
-                buttons: {
-                    Ok: function() {
-                    $( this ).dialog( "close" );
-                    }
-                }
-                });
-            });   
-            $("#hint").addClass("btn-secondary")
-        }); //end of .then
-    }else{
-        console.log("hint unavailable")
-    }
-
-   
-}); //end of button event
 
 
 // create How to play modal
