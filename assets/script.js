@@ -178,7 +178,7 @@ function saveScore(){
 
 }
 
-
+// clear old gif from div tag
 function clearDiv() {
     try {
         $("#divGiphy").remove();
@@ -187,6 +187,7 @@ function clearDiv() {
     }
 }
 
+// hint btn add event listener
 $("#hint").on("click", function() {
     let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
     if (hintCount === 1){
@@ -229,4 +230,26 @@ $("#hint").on("click", function() {
 
    
 }); //end of button event
+
+
+// create How to play modal
+$( function() {
+    $( "#dialogHelp" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 500
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      },
+      width: 305,
+      height: 190,
+    });
+ 
+    $( "#help" ).on( "click", function() {
+      $( "#dialogHelp" ).dialog( "open" );
+    });
+});
 
