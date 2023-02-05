@@ -55,6 +55,7 @@ function findElementByText(text) {
     let jSpot = $("button:contains("+ text +")");
     if ($(jSpot).html() == text) {
         $(jSpot).html(`<del>${text}</del>`);
+        $(jSpot).addClass("d-none")
     }      
     
 }
