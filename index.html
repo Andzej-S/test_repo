@@ -76,10 +76,10 @@
   </header>
 
   <!-- MAIN SECTION -->
-  <div class ="wrapper hide">
+  <div class ="wrapper d-none">
 
     <!-- Container that holds category, difficulty level and play button -->
-    <div class="container hide">
+    <div class="container">
       <div class="row">
         
         <!--Column that holds category dropdown -->
@@ -114,7 +114,7 @@
 
 
     <!-- Container that holds quiz and hint buttons -->
-    <div class="container hide">
+    <div class="container d-none">
       <div class="row">
         <div class="col col-lg-8">
 
@@ -129,8 +129,8 @@
       <div class="row">
         <div class="col col-lg-8">
           <!-- Choices to be displayed here -->
-          <div class="choices hide" id="choices"></div>
-          <p class="hide" id="submitInitials">
+          <div class="choices" id="choices"></div>
+          <p class="d-none" id="submitInitials">
             Enter initials: <input type="text" id="initials" max="99"/>
             <button id="submit">Submit</button>
           </p>
@@ -149,7 +149,7 @@
     
 
     <!-- Container that holds wins, losses, win ratio and next button -->
-    <div class="container hide">
+    <div class="container d-none">
       <div class="row text-center">
         <div class="col col-lg-4">
           <!-- Empty div -->
