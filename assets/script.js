@@ -25,6 +25,10 @@ $("#play-button").on("click", function() {
         return;
     }
 
+    // when play button is clicked hides a div with play button and unhides divs with quiz and score code
+    $(".wrapper .container:first-child").addClass("d-none");
+    $(".wrapper .container:nth-child(2)").removeClass("d-none");
+    $(".wrapper .container:nth-child(3)").removeClass("d-none");
 
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
     
@@ -36,14 +40,6 @@ $("#play-button").on("click", function() {
         quiz = response;
         console.log(response);
         $("#play-button").html("Quiz Started!");
-        /*if(main.classList.contains('hide')){
-            main.classList.remove('hide');
-        }
-        else
-        {
-            main.classList.add('hide')
-        }*/
-        // hide main div, show questions
         DisplayQuestion();
       });
       $("#button2").on("click", function() {
@@ -68,9 +64,6 @@ function DisplayQuestion(){
     newScore = score[questionNumber];
     scoreElement.textContent = newScore;
     lives.innerHTML = livesAmount;
-    /*if(questions.classList.contains('hide')){
-        questions.classList.remove('hide');
-    }*/
     var allAnswers = [];
     choices.innerHTML = "";
     document.getElementById("question-title").innerHTML = quiz[questionNumber].question;
@@ -254,3 +247,15 @@ $( function() {
     });
 });
 
+// Let's start button function and hide functionality
+$("#startBtn").on("click", function() {
+    // When Let's start button is clicked it changes text and unhides play button div
+    $(this).text("Restart Quiz");
+    $(".wrapper").removeClass("d-none");
+
+    // When Restart Quiz button is clicked it reloads the page
+    $(this).click(function() {
+        $(this).text("Let's start");
+        location.reload();
+      });
+});
