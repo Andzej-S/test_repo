@@ -156,8 +156,9 @@ function DisplayQuestion(){
             // begin GIF info modal
             $( function() {
                 $( "#divGiphyInfo" ).dialog({
-                modal: true,         
+                modal: true,                        
                 });
+                $( "#divGiphyInfo" ).attr("class", "");
             });   
             $("#hint").addClass("btn-secondary")   
         }; //end of hint btn event
