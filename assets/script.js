@@ -93,7 +93,8 @@ function DisplayQuestion(){
         }
     }
 
-    // add event listener to 50/50 btn
+
+    // begin add event listener to 50/50 btn
     $("#fifty-fifty").on("click", function(){        
         let arr = []; // select 2 wrong answers 
 
@@ -110,10 +111,10 @@ function DisplayQuestion(){
             console.log("help disabled")
         }
         fiftyCount--;
-        $("#fifty-fifty").addClass("btn-secondary")
+        $("#fifty-fifty").addClass("btn-secondary");
     });
 
-    // hint btn add event listener
+    // begin hint btn add event listener
     $("#hint").on("click", function() {
         let keyword = quiz[questionNumber].correctAnswer;
         let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
@@ -127,8 +128,8 @@ function DisplayQuestion(){
                 clearDiv();
 
                 // create new div container
-                let divGiphy = $("<div/>")    
-                divGiphy.attr("id", "divGiphy")
+                let divGiphy = $("<div/>");    
+                divGiphy.attr("id", "divGiphy");
                 divGiphy.appendTo("body");     
                 
                 $("<img/>", {
@@ -138,28 +139,29 @@ function DisplayQuestion(){
                     class: "giphyImg"
                 }).appendTo(divGiphy);
 
-                // create modal
+                // begin GIF image modal
                 $( function() {
                     $( "#divGiphy" ).dialog({
                     modal: true,
-                    buttons: {
-                        Ok: function() {
-                        $( this ).dialog( "close" );
-                        }
-                    }
+                    width: 400,                 
+
                     });
                 });   
                 $("#hint").addClass("btn-secondary")
+                hintCount--;
             }); //end of .then
         }else{
-            console.log("hint unavailable")
-        }
-
-    
-    }); //end of button event
-
+            console.log("hint unavailable");
+            // begin GIF info modal
+            $( function() {
+                $( "#divGiphyInfo" ).dialog({
+                modal: true,         
+                });
+            });   
+            $("#hint").addClass("btn-secondary")   
+        }; //end of hint btn event
+    });
 } // end of DisplayQuestion()
-
 
 function CorrectAnswer(){
     alert("Correct!");
@@ -226,7 +228,7 @@ function clearDiv() {
 }
 
 
-// create How to play modal
+// begin How to play modal
 $( function() {
     $( "#dialogHelp" ).dialog({
       autoOpen: false,
@@ -257,5 +259,5 @@ $("#startBtn").on("click", function() {
     $(this).click(function() {
         $(this).text("Let's start");
         location.reload();
-      });
+    });
 });
