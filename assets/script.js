@@ -42,14 +42,11 @@ $("#play-button").on("click", function() {
         $("#play-button").html("Quiz Started!");
         DisplayQuestion();
       });
-      $("#button2").on("click", function() {
-        console.log("The answer to the question is : " + quiz[questionNumber].correctAnswer);
-        if (questionNumber >= quiz.length){
-            console.log("quiz finished");
-        }
+      /*$("#button2").on("click", function() {
+        console.log("The answer to the question is : " + quiz[questionNumber].correctAnswer);*/
     })
 
-});
+
 
 function findElementByText(text) {
     let jSpot = $("button:contains("+ text +")");
@@ -84,7 +81,7 @@ function DisplayQuestion(){
         if(quiz[questionNumber].correctAnswer == allAnswers[i]){
             $(choiceBtn).on("click", function() {
                 CorrectAnswer();
-                NextQuestion();
+                setTimeout(NextQuestion, 1000);
             })
         }
         else{
@@ -166,14 +163,14 @@ function DisplayQuestion(){
 } // end of DisplayQuestion()
 
 function CorrectAnswer(){
-    alert("Correct!");
+    document.getElementById("question-title").style.backgroundColor = "green";
     newScore = score[questionNumber + 1];
     scoreElement.textContent = newScore;
 }
 
 
 function WrongAnswer(){
-    alert("Incorrect!");
+    document.getElementById("question-title").style.backgroundColor = "red";
     if(livesAmount <= 1){
         livesAmount--;
         YouLost()
@@ -182,12 +179,13 @@ function WrongAnswer(){
     }
     livesAmount--;
     lives.innerHTML = livesAmount;
-    NextQuestion();
+    setTimeout(NextQuestion, 1000);
 }
 
 
 function NextQuestion(){
     questionNumber++
+    document.getElementById("question-title").style.backgroundColor = "white";
     if(questionNumber < limit){
         DisplayQuestion();
     }
