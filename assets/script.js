@@ -173,8 +173,8 @@ function WrongAnswer(){
     document.getElementById("question-title").style.backgroundColor = "red";
     if(livesAmount <= 1){
         livesAmount--;
-        YouLost()
-        EndQuiz();
+        setTimeout(YouLost, 1000);
+        setTimeout(EndQuiz, 1000);
         return;
     }
     livesAmount--;
@@ -190,12 +190,13 @@ function NextQuestion(){
         DisplayQuestion();
     }
     else
-        EndQuiz();
+        setTimeout(EndQuiz, 1000);
 }
 
 
 function EndQuiz(){
     //hide questions and answers, show hidden divs
+    lives.innerHTML = livesAmount;
     submitBtn.addEventListener("click", saveScore());
     $("#mainQuiz").addClass("d-none");
     $("#submitInitials").removeClass("d-none");
