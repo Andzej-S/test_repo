@@ -14,12 +14,13 @@ var newScore = 0;
 let fiftyCount = 1;
 let hintCount = 1;
 let highscoresArr = [];
+let difficultyValue;
 // localStorage.clear();
 
 
 
-function checkHighscores(user) {
-    if (localStorage.getItem('quizHeroHighscores')) {
+function checkHighscores(boool, user) {
+    if (localStorage.getItem('quizHeroHighscores') && !boool) {
     highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
     // console.log(localStorage.getItem('quizHeroHighscores'));
     } else {
@@ -35,7 +36,7 @@ $("#play-button").on("click", function() {
     var categorySelect = document.getElementById('category');
     var categoryValue = categorySelect.value;
     var difficulty = document.getElementById('difficulty');
-    var difficultyValue = difficulty.value;
+    difficultyValue = difficulty.value;
 
     if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
         console.log("Please select a category and difficulty!");
@@ -242,15 +243,16 @@ function YouLost(){
 function saveScore(){
   submitBtn.onclick = function(){
     // Grab the value of the 'initials' element
-    var initials = $('#initials').value;
-    var difficultyLevel = $("#difficultyLevel").value
+    var initials = $('#initials').val();    
     // Create a new object with the current score and the initials
     var curentUser = {
         "score" : newScore,
-        "initials" : initials,
-        "difficulty" : difficultyLevel
+        "user" : initials,
+        "difficulty" : difficultyValue
     }
-    checkHighscores(true, curentUser);
+    
+    checkHighscores(false, curentUser);
+
     // get existing data from local storage
     // var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
     // // add new score to existing data
@@ -311,3 +313,31 @@ function YouWon(){
     console.log("You Win!");
     EndQuiz();
 }
+
+$("#highscores").on("click", function(){
+    $("#highscoreTable").removeClass("d-none");
+    highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
+
+    if (localStorage.getItem('quizHeroHighscores')) {
+        for(let i = 0; i < highscoresArr.length; i++){
+            let tableRows = $("<tr/>");
+            tableRows.html( 
+                `
+                <td class="user display-5 text-center">
+                  <p class="pt-2 text-info">${highscoresArr[i].user}</p>
+                </td>
+                <td class="level display-5 text-center">
+                  <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
+                </td> 
+                <td class="score display-5 text-center">              
+                  <p class="pt-2 text-info">${highscoresArr[i].score}</p>
+                </td>     
+                <td class="icon display-5 text-center">
+                  <p class="pt-2 text-info">13543</p>
+                </td>               
+              `
+            ).appendTo($("#tBody"))
+        }
+    }    
+    
+});

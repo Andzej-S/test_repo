@@ -37,7 +37,7 @@
               <a class="nav-link active" aria-current="page" href="#">Home</a>
             </li>
             <li class="nav-item mx-5">
-              <a class="nav-link" href="#highscores">Highscores</a>
+              <a class="nav-link" id="highscores">Highscores</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="help" role="button">How to play</a>
@@ -186,6 +186,31 @@
   </div>
   <!-- END OF MODALS -->
 
+  <!-- TABLE WITH HIGHSCORES -->
+  <div class="container d-none" id="highscoreTable">
+    <!-- Timeblocks go here -->
+    <table class="w-100">
+      <thead>
+        <tr>
+          <th scope="col" class="text-center">USER</th>
+          <th scope="col" class="text-center">DIFFICULTY</th>
+          <th scope="col" class="text-center display-7">SCORE</th>
+          <th scope="col" class="text-center">Icon</th>
+        </tr>
+        <td class="user display-5 text-center">
+        </td>
+        <td class="level display-5 text-center">
+        </td> 
+        <td class="score display-5 text-center">              
+        </td>     
+        <td class="icon display-5 text-center">
+        </td>  
+      </thead>
+      <tbody id="tBody">      
+      </tbody>
+    </table>
+  </div>
+    <!-- END OF TABLE WITH HIGHSCORES -->
 
   <!-- FOOTER SECTION -->
   <div class="footer">
