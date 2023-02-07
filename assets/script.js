@@ -13,12 +13,30 @@ var limit = score.length - 1;
 var newScore = 0;
 let fiftyCount = 1;
 let hintCount = 1;
+let highscoresArr = [];
+let difficultyValue;
+// localStorage.clear();
+
+
+
+function checkHighscores(boool, user) {
+    if (localStorage.getItem('quizHeroHighscores') && !boool) {
+    highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
+    // console.log(localStorage.getItem('quizHeroHighscores'));
+    } else {
+        highscoresArr.push(user);
+        localStorage.setItem('quizHeroHighscores', JSON.stringify(highscoresArr));
+        console.log(localStorage.getItem('quizHeroHighscores'));
+    }
+}
+
+
 
 $("#play-button").on("click", function() {
     var categorySelect = document.getElementById('category');
     var categoryValue = categorySelect.value;
     var difficulty = document.getElementById('difficulty');
-    var difficultyValue = difficulty.value;
+    difficultyValue = difficulty.value;
 
     if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
         console.log("Please select a category and difficulty!");
@@ -53,7 +71,7 @@ function findElementByText(text) {
     if ($(jSpot).html() == text) {
         $(jSpot).html(`<del>${text}</del>`);
         $(jSpot).addClass("d-none")
-    }      
+    }   
     
 }
 
@@ -106,7 +124,14 @@ function DisplayQuestion(){
                 findElementByText(element);
             })
         }else {
-            console.log("help disabled")
+            console.log("help disabled");
+            $( function() {
+                $( "#div50Info" ).dialog({
+                modal: true,                        
+                });
+                $( "#div50Info" ).attr("class", "");
+            });   
+            $
         }
         fiftyCount--;
         $("#fifty-fifty").addClass("btn-secondary");
@@ -160,6 +185,8 @@ function DisplayQuestion(){
             $("#hint").addClass("btn-secondary")   
         }; //end of hint btn event
     });
+
+
 } // end of DisplayQuestion()
 
 function CorrectAnswer(){
@@ -214,19 +241,23 @@ function YouLost(){
 function saveScore(){
   submitBtn.onclick = function(){
     // Grab the value of the 'initials' element
-    var initials = document.getElementById('initials').value;
+    var initials = $('#initials').val();    
     // Create a new object with the current score and the initials
-    var newScores = {
+    var curentUser = {
         "score" : newScore,
-        "initials" : initials
+        "user" : initials,
+        "difficulty" : difficultyValue
     }
+    
+    checkHighscores(false, curentUser);
+
     // get existing data from local storage
-    var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
-    // add new score to existing data
-    existingScores.push(newScores);
-    // save updated data to local storage
-    localStorage.setItem("newScores", JSON.stringify(existingScores));
-    console.log(localStorage.getItem('newScores'));
+    // var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
+    // // add new score to existing data
+    // existingScores.push(newScores);
+    // // save updated data to local storage
+    // localStorage.setItem("newScores", JSON.stringify(existingScores));
+    // console.log(localStorage.getItem('newScores'));
   }
 
 }
@@ -280,3 +311,31 @@ function YouWon(){
     console.log("You Win!");
     EndQuiz();
 }
+
+$("#highscores").on("click", function(){
+    $("#highscoreTable").removeClass("d-none");
+    highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
+
+    if (localStorage.getItem('quizHeroHighscores')) {
+        for(let i = 0; i < highscoresArr.length; i++){
+            let tableRows = $("<tr/>");
+            tableRows.html( 
+                `
+                <td class="user display-5 text-center">
+                  <p class="pt-2 text-info">${highscoresArr[i].user}</p>
+                </td>
+                <td class="level display-5 text-center">
+                  <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
+                </td> 
+                <td class="score display-5 text-center">              
+                  <p class="pt-2 text-info">${highscoresArr[i].score}</p>
+                </td>     
+                <td class="icon display-5 text-center">
+                  <p class="pt-2 text-info">13543</p>
+                </td>               
+              `
+            ).appendTo($("#tBody"))
+        }
+    }    
+    
+});
