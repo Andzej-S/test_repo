@@ -8,8 +8,8 @@ var questions = document.getElementById('questions');
 var scoreElement = document.getElementById('score');
 var lives = document.getElementById('lives');
 var submitBtn = document.getElementById('submit');
-var score = [0,10,100,500,1000,5000,10000,50000,100000,10000000];
-var limit = score.length;
+var score = [0,1,2,3,4,5,6,7,8,9,10];
+var limit = score.length - 1;
 var newScore = 0;
 let fiftyCount = 1;
 let hintCount = 1;
@@ -195,20 +195,20 @@ function CorrectAnswer(){
     alert("Correct!");
     newScore = score[questionNumber + 1];
     scoreElement.textContent = newScore;
-    curentUser.score = newScore; 
-
-
-    console.log(newScore);
 }
 
 
 function WrongAnswer(){
     alert("Incorrect!");
     if(livesAmount <= 1){
-      EndQuiz();
+        livesAmount--;
+        YouLost()
+        EndQuiz();
+        return;
     }
     livesAmount--;
     lives.innerHTML = livesAmount;
+    NextQuestion();
 }
 
 
@@ -224,8 +224,18 @@ function NextQuestion(){
 
 function EndQuiz(){
     //hide questions and answers, show hidden divs
-    alert("you lost the quiz!");
     submitBtn.addEventListener("click", saveScore());
+    $("#mainQuiz").addClass("d-none");
+    $("#submitInitials").removeClass("d-none");
+    // if the user wins, do this
+    if(newScore == 10){
+        // TODO ----------------------------------------------- INSERT COOL GIF OR ANIMATION OR SOMETHING FOR GETTING 10!!!
+        console.log("You Won!");
+    }
+}
+
+function YouLost(){
+    console.log("you lost");
 }
 
 
@@ -284,7 +294,8 @@ $( function() {
 });
 
 // Let's start button function and hide functionality
-$("#startBtn").on("click", function() {
+
+$("#startBtn").on("click", function () {
     // When Let's start button is clicked it changes text and unhides play button div
     $(this).text("Restart Quiz");
     $(".wrapper").removeClass("d-none");
@@ -295,3 +306,8 @@ $("#startBtn").on("click", function() {
         location.reload();
     });
 });
+
+function YouWon(){
+    console.log("You Win!");
+    EndQuiz();
+}

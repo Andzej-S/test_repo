@@ -114,7 +114,7 @@
 
 
     <!-- Container that holds quiz and hint buttons -->
-    <div class="container d-none">
+    <div class="container d-none" id="mainQuiz">
       <div class="row">
         <div class="col col-lg-8">
 
@@ -130,10 +130,6 @@
         <div class="col col-lg-8">
           <!-- Choices to be displayed here -->
           <div class="choices" id="choices"></div>
-          <p class="d-none" id="submitInitials">
-            Enter initials: <input type="text" id="initials" max="99"/>
-            <button id="submit">Submit</button>
-          </p>
         </div>
 
         <!-- Hint buttons -->
@@ -168,6 +164,12 @@
       </div>
     </div>
     <!-- End of container that holds wins, losses, win ratio and next button -->
+
+    <p class="d-none" id="submitInitials">
+      Enter initials: <input type="text" id="initials" max="99"/>
+      <button id="submit">Submit</button>
+    </p>
+    
   </div>
   <!-- END OF MAIN SECTION -->
 
