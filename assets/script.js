@@ -42,14 +42,14 @@ $("#play-button").on("click", function() {
         $("#play-button").html("Quiz Started!");
         DisplayQuestion();
       });
-      $("#button2").on("click", function() {
-        console.log("The answer to the question is : " + quiz[questionNumber].correctAnswer);
+      /*$("#button2").on("click", function() {
+        console.log("The answer to the question is : " + quiz[questionNumber].correctAnswer);*/
         if (questionNumber >= quiz.length){
             console.log("quiz finished");
         }
     })
 
-});
+
 
 function findElementByText(text) {
     let jSpot = $("button:contains("+ text +")");
