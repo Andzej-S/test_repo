@@ -13,6 +13,23 @@ var limit = score.length;
 var newScore = 0;
 let fiftyCount = 1;
 let hintCount = 1;
+let highscoresArr = [];
+// localStorage.clear();
+
+
+
+function checkHighscores(user) {
+    if (localStorage.getItem('quizHeroHighscores')) {
+    highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
+    // console.log(localStorage.getItem('quizHeroHighscores'));
+    } else {
+        highscoresArr.push(user);
+        localStorage.setItem('quizHeroHighscores', JSON.stringify(highscoresArr));
+        console.log(localStorage.getItem('quizHeroHighscores'));
+    }
+}
+
+
 
 $("#play-button").on("click", function() {
     var categorySelect = document.getElementById('category');
@@ -56,7 +73,7 @@ function findElementByText(text) {
     if ($(jSpot).html() == text) {
         $(jSpot).html(`<del>${text}</del>`);
         $(jSpot).addClass("d-none")
-    }      
+    }   
     
 }
 
@@ -109,7 +126,14 @@ function DisplayQuestion(){
                 findElementByText(element);
             })
         }else {
-            console.log("help disabled")
+            console.log("help disabled");
+            $( function() {
+                $( "#div50Info" ).dialog({
+                modal: true,                        
+                });
+                $( "#div50Info" ).attr("class", "");
+            });   
+            $
         }
         fiftyCount--;
         $("#fifty-fifty").addClass("btn-secondary");
@@ -163,12 +187,17 @@ function DisplayQuestion(){
             $("#hint").addClass("btn-secondary")   
         }; //end of hint btn event
     });
+
+
 } // end of DisplayQuestion()
 
 function CorrectAnswer(){
     alert("Correct!");
     newScore = score[questionNumber + 1];
     scoreElement.textContent = newScore;
+    curentUser.score = newScore; 
+
+
     console.log(newScore);
 }
 
@@ -203,19 +232,22 @@ function EndQuiz(){
 function saveScore(){
   submitBtn.onclick = function(){
     // Grab the value of the 'initials' element
-    var initials = document.getElementById('initials').value;
+    var initials = $('#initials').value;
+    var difficultyLevel = $("#difficultyLevel").value
     // Create a new object with the current score and the initials
-    var newScores = {
+    var curentUser = {
         "score" : newScore,
-        "initials" : initials
+        "initials" : initials,
+        "difficulty" : difficultyLevel
     }
+    checkHighscores(true, curentUser);
     // get existing data from local storage
-    var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
-    // add new score to existing data
-    existingScores.push(newScores);
-    // save updated data to local storage
-    localStorage.setItem("newScores", JSON.stringify(existingScores));
-    console.log(localStorage.getItem('newScores'));
+    // var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
+    // // add new score to existing data
+    // existingScores.push(newScores);
+    // // save updated data to local storage
+    // localStorage.setItem("newScores", JSON.stringify(existingScores));
+    // console.log(localStorage.getItem('newScores'));
   }
 
 }
