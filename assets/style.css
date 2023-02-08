@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+.shadow {
+    box-shadow: none!important;   
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -215,16 +219,6 @@ option{
     width: 100px;
     height: 40px;
  }
-
-
- 
-
-.shadow {
-    box-shadow: none!important;
-}
-
-
-
   
 
 
