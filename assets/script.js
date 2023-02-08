@@ -55,7 +55,6 @@ function findElementByText(text) {
         $(jSpot).html(`<del>${text}</del>`);
         $(jSpot).addClass("d-none")
     }   
-    
 }
 
 
