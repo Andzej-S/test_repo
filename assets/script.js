@@ -14,7 +14,6 @@ var limit = score.length - 1;
 var newScore = 0;
 let difficultyValue;
 let arrWrongAnswersSelect = []; 
-// localStorage.clear();
 
 
 function findElementByText(text) {
@@ -337,7 +336,7 @@ $( function() {
 });
 
 
-//  BTN EVENT LISTENERS
+//  BUTTONS EVENT LISTENERS
 $("#play-button").on("click", function() {
     var categorySelect = $('#category');
     var categoryValue = categorySelect.val();
@@ -383,5 +382,24 @@ $("#startBtn").on("click", function () {
     });
 });
 
-// show highscores
-// $("#highscores").on("click", writeTable);
+$("#resetScores").on("click", function(){
+    localStorage.clear();
+    location.reload();
+});
+
+$("#resetScores").mouseover(function(){
+    // INITIALIZE TOOLTIPS
+    // const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+    // const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+    var tooltip = new bootstrap.Tooltip($("#resetScores"));
+});
+
+const $tooltip = $('[data-bs-toggle="tooltip"]');
+ $tooltip.tooltip({
+   html: true,
+   trigger: 'mouseleave',
+   placement: 'bottom',
+ });
+ $tooltip.on('show.bs.tooltip', () => {
+   $('.tooltip').not(this).remove();
+ });
