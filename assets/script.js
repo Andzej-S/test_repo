@@ -13,6 +13,7 @@ var limit = score.length - 1;
 var newScore = 0;
 let fiftyCount = 1;
 let hintCount = 1;
+var test = "hello";
 
 $("#play-button").on("click", function() {
     var categorySelect = document.getElementById('category');
