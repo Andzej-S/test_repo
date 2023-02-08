@@ -11,32 +11,18 @@ var submitBtn = document.getElementById('submit');
 var score = [0,1,2,3,4,5,6,7,8,9,10];
 var limit = score.length - 1;
 var newScore = 0;
-let fiftyCount = 1;
-let hintCount = 1;
-let highscoresArr = [];
 let difficultyValue;
+let arrWrongAnswersSelect = []; 
 // localStorage.clear();
 
 
-
-function checkHighscores(boool, user) {
-    if (localStorage.getItem('quizHeroHighscores') && !boool) {
-    highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
-    // console.log(localStorage.getItem('quizHeroHighscores'));
-    } else {
-        highscoresArr.push(user);
-        localStorage.setItem('quizHeroHighscores', JSON.stringify(highscoresArr));
-        console.log(localStorage.getItem('quizHeroHighscores'));
-    }
-}
-
-
-
 $("#play-button").on("click", function() {
-    var categorySelect = document.getElementById('category');
-    var categoryValue = categorySelect.value;
-    var difficulty = document.getElementById('difficulty');
-    difficultyValue = difficulty.value;
+    var categorySelect = $('#category');
+    var categoryValue = categorySelect.val();
+    var difficulty = $('#difficulty');
+    difficultyValue = difficulty.val();
+    fiftyCount = 1;
+    hintCount = 1;
 
     if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
         console.log("Please select a category and difficulty!");
@@ -65,7 +51,6 @@ $("#play-button").on("click", function() {
     })
 
 
-
 function findElementByText(text) {
     let jSpot = $("button:contains("+ text +")");
     if ($(jSpot).html() == text) {
@@ -76,7 +61,7 @@ function findElementByText(text) {
 }
 
 
-function DisplayQuestion(){    
+function DisplayQuestion(){   
     newScore = score[questionNumber];
     scoreElement.textContent = newScore;
     lives.innerHTML = livesAmount;
@@ -109,85 +94,12 @@ function DisplayQuestion(){
         }
     }
 
-
-    // begin add event listener to 50/50 btn
-    $("#fifty-fifty").on("click", function(){        
-        let arr = []; // select 2 wrong answers 
-
-        for (let j=0; j<2; j++){
-            arr.push(quiz[questionNumber].incorrectAnswers[j])
-        }
-
-        if (fiftyCount === 1){
-            console.log(arr)
-            arr.forEach(element => {       
-                findElementByText(element);
-            })
-        }else {
-            console.log("help disabled");
-            $( function() {
-                $( "#div50Info" ).dialog({
-                modal: true,                        
-                });
-                $( "#div50Info" ).attr("class", "");
-            });   
-            $
-        }
-        fiftyCount--;
-        $("#fifty-fifty").addClass("btn-secondary");
-    });
-
-    // begin hint btn add event listener
-    $("#hint").on("click", function() {
-        let keyword = quiz[questionNumber].correctAnswer;
-        let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
-        if (hintCount === 1){
-            $.ajax({
-            url: queryUrlGiphy,
-            method: "GET"
-            })
-            .then(function(response) {
-                // clear div container with the gif
-                clearDiv();
-
-                // create new div container
-                let divGiphy = $("<div/>");    
-                divGiphy.attr("id", "divGiphy");
-                divGiphy.appendTo("body");     
-                
-                $("<img/>", {
-                    // get a random image from the search result
-                    src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
-                    alt: keyword,
-                    class: "giphyImg"
-                }).appendTo(divGiphy);
-
-                // begin GIF image modal
-                $( function() {
-                    $( "#divGiphy" ).dialog({
-                    modal: true,
-                    width: 400,                 
-
-                    });
-                });   
-                $("#hint").addClass("btn-secondary")
-                hintCount--;
-            }); //end of .then
-        }else{
-            console.log("hint unavailable");
-            // begin GIF info modal
-            $( function() {
-                $( "#divGiphyInfo" ).dialog({
-                modal: true,                        
-                });
-                $( "#divGiphyInfo" ).attr("class", "");
-            });   
-            $("#hint").addClass("btn-secondary")   
-        }; //end of hint btn event
-    });
-
-
+    // collect 2 wrong answers for 50-50
+    for (let j=0; j<2; j++){
+        arrWrongAnswersSelect.push(quiz[questionNumber].incorrectAnswers[j])
+    }    
 } // end of DisplayQuestion()
+
 
 function CorrectAnswer(){
     document.getElementById("question-title").style.backgroundColor = "green";
@@ -237,19 +149,34 @@ function YouLost(){
     console.log("you lost");
 }
 
+function fetchSetLocalHighscores(user) {
+    let arr;
+
+    if (localStorage.getItem('quizHeroHighscores')) {
+        arr = JSON.parse(localStorage.getItem('quizHeroHighscores')); 
+        arr.push(user);  
+        localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));     
+
+    } else {
+        arr.push(user);
+        localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));
+    } 
+}
+
 
 function saveScore(){
   submitBtn.onclick = function(){
     // Grab the value of the 'initials' element
-    var initials = $('#initials').val();    
+    let initials = $('#initials').val();    
     // Create a new object with the current score and the initials
-    var curentUser = {
+    let curentUser = {
         "score" : newScore,
         "user" : initials,
         "difficulty" : difficultyValue
     }
     
-    checkHighscores(false, curentUser);
+    fetchSetLocalHighscores(curentUser);
+
 
     // get existing data from local storage
     // var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
@@ -271,6 +198,7 @@ function clearDiv() {
     }
 }
 
+// ** MODALS **
 
 // begin How to play modal
 $( function() {
@@ -285,17 +213,108 @@ $( function() {
         duration: 1000
       },
       width: 305,
+      height: 230,
+    }).attr("class", "text-center m-2");
+ 
+    $( "#help" ).on( "click", function() {
+      $( "#dialogHelp" ).dialog("open");
+    });
+});
+
+// begin GIF hint modal
+$( function() {
+    $( "#divGiphy" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 500
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      },
+      width: 305,
       height: 190,
     });
  
-    $( "#help" ).on( "click", function() {
-      $( "#dialogHelp" ).dialog( "open" );
+    $("#hint").on( "click", function() {
+        if($("#hint").attr("class") === "main btn btn-secondary"){
+            $( "#divError" ).dialog( "open" );           
+        } else {
+            let keyword = quiz[questionNumber].correctAnswer;
+            let queryUrlGiphy = `https://api.giphy.com/v1/gifs/search?api_key=XJlgVWxiis4H5jkFrxubKXWwMy9SjyEd&q=${keyword}&limit=20&offset=0&rating=g&lang=en`;
+
+            $.ajax({
+            url: queryUrlGiphy,
+            method: "GET"
+            })
+            .then(function(response) {
+                // clear div container with the gif
+                clearDiv();
+                // create new div container
+                let divGiphy = $("<div/>");    
+                divGiphy.attr("id", "divGiphy");
+                divGiphy.appendTo("body");   
+                
+                $("<img/>", {
+                    // get a random image from the search result
+                    src: response.data[Math.floor(Math.random() * 4) + 1].images.downsized_medium.url,
+                    alt: keyword,
+                    class: "giphyImg"
+                }).appendTo(divGiphy);
+
+                // begin GIF image modal
+                $( function() {
+                    $( "#divGiphy" ).dialog({
+                    modal: true,
+                    width: 400,                
+                    });
+                });
+
+                $("#hint").removeClass("btn-primary")
+                $("#hint").addClass("main btn btn-secondary")
+                
+            }); //end of .then           
+        }
+    });
+});
+
+// begin 50-50 modal
+$( function() {
+    $( "#divError" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 500
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      },
+      width: 305,
+      height: 190,
+    });
+
+
+ 
+    $("#fifty-fifty").on( "click", function() {
+        if($("#fifty-fifty").attr("class") === "main btn btn-secondary"){
+            $( "#divError" ).dialog("open");       
+ 
+        }else{
+            arrWrongAnswersSelect.forEach(element => {       
+                findElementByText(element);
+            });
+
+            $("#fifty-fifty").removeClass("btn-primary")
+            $("#fifty-fifty").addClass("btn-secondary");
+        }
     });
 });
 
 // Let's start button function and hide functionality
-
 $("#startBtn").on("click", function () {
+  
     // When Let's start button is clicked it changes text and unhides play button div
     $(this).text("Restart Quiz");
     $(".wrapper").removeClass("d-none");
@@ -305,6 +324,8 @@ $("#startBtn").on("click", function () {
         $(this).text("Let's start");
         location.reload();
     });
+    fiftyCount = 1;
+    hintCount = 1;
 });
 
 function YouWon(){
@@ -312,30 +333,32 @@ function YouWon(){
     EndQuiz();
 }
 
+// show highscores
 $("#highscores").on("click", function(){
-    $("#highscoreTable").removeClass("d-none");
-    highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
+    // remove existing values in table    
+    $(".removeTag").each(function(){ $(this).remove()})
 
-    if (localStorage.getItem('quizHeroHighscores')) {
-        for(let i = 0; i < highscoresArr.length; i++){
-            let tableRows = $("<tr/>");
-            tableRows.html( 
-                `
-                <td class="user display-5 text-center">
-                  <p class="pt-2 text-info">${highscoresArr[i].user}</p>
-                </td>
-                <td class="level display-5 text-center">
-                  <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
-                </td> 
-                <td class="score display-5 text-center">              
-                  <p class="pt-2 text-info">${highscoresArr[i].score}</p>
-                </td>     
-                <td class="icon display-5 text-center">
-                  <p class="pt-2 text-info">13543</p>
-                </td>               
-              `
-            ).appendTo($("#tBody"))
-        }
-    }    
+    // add from local storage
+    $("#highscoreTable").removeClass("d-none");
+    let highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores')) || [];
     
+    for(let i = 0; i < highscoresArr.length; i++){
+        let tableRows = $("<tr/>");
+        tableRows.html( 
+            `
+            <td class="user display-5 text-center removeTag">
+                <p class="pt-2 text-info">${highscoresArr[i].user}</p>
+            </td>
+            <td class="level display-5 text-center removeTag">
+                <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
+            </td> 
+            <td class="score display-5 text-center removeTag">              
+                <p class="pt-2 text-info">${highscoresArr[i].score}</p>
+            </td>     
+            <td class="icon display-5 text-center removeTag">
+                <p class="pt-2 text-info">13543</p>
+            </td>               
+            `
+        ).appendTo($("#tBody"))
+    }
 });
