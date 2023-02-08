@@ -150,7 +150,7 @@ function writeTable(){
     $(".removeTag").each(function(){ $(this).remove()})
 
     // add from local storage
-    $("#highscoreTable").removeClass("d-none");
+    // $("#highscoreTable").removeClass("d-none");
     let highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
 
     if (localStorage.getItem('quizHeroHighscores')) {
@@ -159,21 +159,20 @@ function writeTable(){
             let tableRows = $("<tr/>");
             tableRows.html( 
                 `
-                <td class="user display-5 text-center removeTag">
+                <td class="user display-6 text-center removeTag">
                     <p class="pt-2 text-info">${highscoresArr[i].user}</p>
                 </td>
-                <td class="level display-5 text-center removeTag">
+                <td class="level display-6 text-center removeTag">
                     <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
                 </td> 
-                <td class="score display-5 text-center removeTag">              
+                <td class="score display-6 text-center removeTag">              
                     <p class="pt-2 text-info">${highscoresArr[i].score}</p>
                 </td>     
-                <td class="icon display-5 text-center removeTag">
+                <td class="icon display-6 text-center removeTag">
                     <p class="pt-2 text-info"></p>
                 </td>               
                 `
-            ).appendTo($("#tBody"))
-            console.log($("#tBody").html())
+            ).appendTo($("#tBody"))            
         }
     } else {
         console.log("no results saved!")
@@ -304,6 +303,29 @@ $( function() {
     });
 });
 
+// begin highscores modal
+$( function() {
+    $( "#highscoreTable" ).dialog({
+      autoOpen: false,
+      show: {
+        effect: "blind",
+        duration: 500
+      },
+      hide: {
+        effect: "explode",
+        duration: 1000
+      },
+      width: 600,
+    //   height: 600,
+    }).attr("class", "text-center m-2");
+ 
+    $("#highscores").on("click", function(){
+        writeTable();
+        $("#highscoreTable").removeClass("d-none");
+        $( "#highscoreTable" ).dialog("open");
+    });
+});
+
 
 //  BTN EVENT LISTENERS
 $("#play-button").on("click", function() {
@@ -352,4 +374,4 @@ $("#startBtn").on("click", function () {
 });
 
 // show highscores
-$("#highscores").on("click", writeTable);
+// $("#highscores").on("click", writeTable);
