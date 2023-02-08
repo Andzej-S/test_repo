@@ -26,15 +26,15 @@
   <!-- MAIN NAVIGATION -->
   <header>
     <!-- NAVBAR SECTION -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navbar-desktop"> <!-- DESKTOP ONLY -->
+    <nav class="navbar navbar-expand-lg " id="navbar-desktop"> <!-- DESKTOP ONLY -->
       <div class="container-fluid"> 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="#" id="home" role="button">Home</a>
             </li>
             <li class="nav-item mx-5">
               <a class="nav-link" id="highscores" role="button">Highscores</a>
@@ -62,7 +62,7 @@
             </div>
             <div class="lc-block mb-5">
               <div editable="rich">
-                <p class="lead"> Feel free to test your knowledge with our free quiz. Just pick a section you ace on or other subject you want to learn more and fire up some questions! Good luck! </p>
+                <p class="lead"> Test your knowledge with our free quiz. Pick a category & difficulty and fire up some questions! Good luck! </p>
               </div>
             </div><!-- /lc-block -->
             <div class="lc-block">
@@ -84,7 +84,7 @@
         
         <!--Column that holds category dropdown -->
         <div class="col col-lg-4">
-          <select class="form-select"  id="category" aria-label="Default select example">
+          <select class="form-select"   id="category" aria-label="Default select example">
             <option selected>Category</option>  
             <option value="history">History</option>
             <option value="science">Science</option>
@@ -175,7 +175,9 @@
 
   <!-- MODALS -->
   <div id="dialogHelp" title="How to play">
-    <p>The game can begin after you selected the category of questions you want to play and the difficulty level. Hit Play! and the game is on!</p>
+    <p>1. Click "Let's start"</p>
+    <p>2. Select your category and difficulty</p>
+    <p>3. Click "Play!"</p>
   </div>
   <div id="divError" title="Hint unavailable">
     <p>Lifeline already used!</p>
