@@ -133,3 +133,43 @@
 	color: #ffffff;
 	font-weight: bold;
 }
+
+.ui-widget-content {
+	border: 1px solid #dddddd;
+	background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
+	color: #1b1b1b;
+}
+
+
+#resetScores:hover{
+    color:#f8c245
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+
+.tooltip {
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.tooltip .tooltiptext { 
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+      
+}
+.tooltip:hover tooltiptext{
+    visibility: visible;
+}
