@@ -217,11 +217,11 @@ option{
  }
 
 
-
-  
  
 
-
+.shadow {
+    box-shadow: none!important;
+}
 
 
 
