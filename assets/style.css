@@ -5,23 +5,52 @@
     box-sizing: border-box;
 }
 
+
+/* This will fill all the middle section of the main page, between navbar and footer -TH*/
+body {
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 20%, rgba(48,7,75,1) 40%, rgba(32,9,60,1) 63%, rgba(10,10,96,1) 86%, rgba(56,8,62,1) 100%);
+  }
+
+
+
+
+
+  
 .container {
     border-style: solid;
     border-width: 1px;
-    padding: 10px;
+    color: orange;
+    align-content: center;
+    width: 100%;
+        
 }
+
+.img-fluid {
+    width: 100%;
+  }
+
+h3 {
+    color: orange;
+    text-align: center;
+}
+
 
 #question-title {
-    border-style: solid;
+    border-style: transparent;
     border-width: 1px;
     min-height: 2.5rem;
+    text-align: center;
 }
 
-.choices {
+/* .choices {
     border-style: solid;
     border-width: 1px;
     min-height: 15rem;
-}
+    border-radius: 2px;
+
+} */
+
 
 /* .lives {
     border-style: solid;
@@ -30,12 +59,43 @@
 } */
 
 .hints {
-    border-style: solid;
-    border-width: 1px;
+        border-width: 1px;
+    display: flex;
+    justify-content: center;
+
 }
 
-#lives,
-#score {
+.hints button {
+    width: 200px;
+    height: 95px;
+    text-align: center;
+    margin: 2px auto;
+    border: 6px solid orange;
+    font-size: 20px;
+
+  }
+
+  .btn-primary {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: rgb(29, 29, 41);
+  }
+
+
+
+.main {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  @media (min-width: 576px) {
+    .main {
+      width: calc(33.33% - 10px);
+      margin-bottom: 20px;
+    }
+  }
+
+
+span {
     box-sizing: border-box;
     border-style: solid;
     border-width: 1px;
@@ -43,8 +103,21 @@
     width: 5rem;
     display: inline-block;
     vertical-align: middle;
+    color: white;
   }
 
+  .lives, .score {
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    width: 100px;
+    height: 40px;
+ }
+
+
+
+  
+ 
 
 
 
@@ -89,16 +162,19 @@
 .social-icons {
     margin-top: 20px;
     size: 50%;
+     
 }
 
 .social-icons i {
     font-size: 22px;
     margin: 10px;
-    cursor:pointer
+    cursor:pointer;
 }
 
 .social-icons a {
-    display: block;
+    display: flex;
+    margin-left: 35%;
+
 }
 
 .footer p {
@@ -107,69 +183,10 @@
    display: inline;
 }
 
-/* jQuery UI custom styling */
+
 .giphyImg {
     border-radius: 8px;
     max-width:100%;
     max-height:100%;
     background-color: grey;
-}
-
-.ui-dialog .ui-dialog-titlebar{
-    text-align: center;
-    max-width:100%;
-    font-size: x-large;    
-}
-
-.ui-widget-content {
-	border: 1px solid #dddddd;
-	background: #eae6dd url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
-	color: #333333;
-}
-
-.ui-widget-header {
-	border: 1px solid #080ce7;
-	background: #c883c9 url(images/ui-bg_gloss-wave_35_f6a828_500x100.png) 50% 50% repeat-x;
-	color: #ffffff;
-	font-weight: bold;
-}
-
-.ui-widget-content {
-	border: 1px solid #dddddd;
-	background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
-	color: #1b1b1b;
-}
-
-
-#resetScores:hover{
-    color:#f8c245
-}
-.tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-  }
-
-.tooltip {
-position: relative;
-display: inline-block;
-border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
-
-.tooltip .tooltiptext { 
-    visibility: hidden;
-    width: 120px;
-    background-color: black;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-  
-    /* Position the tooltip */
-    position: absolute;
-    z-index: 1;
-      
-}
-.tooltip:hover tooltiptext{
-    visibility: visible;
 }
