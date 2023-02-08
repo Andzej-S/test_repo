@@ -21,8 +21,6 @@ $("#play-button").on("click", function() {
     var categoryValue = categorySelect.val();
     var difficulty = $('#difficulty');
     difficultyValue = difficulty.val();
-    fiftyCount = 1;
-    hintCount = 1;
 
     if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
         console.log("Please select a category and difficulty!");
@@ -325,8 +323,6 @@ $("#startBtn").on("click", function () {
         $(this).text("Let's start");
         location.reload();
     });
-    fiftyCount = 1;
-    hintCount = 1;
 });
 
 function YouWon(){
