@@ -140,7 +140,8 @@ function saveScore(){
         } else {
             arr.push(curentUser);
             localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));
-        } 
+        }
+        $("#submitInitials").addClass("d-none");
     // });
   
 }
