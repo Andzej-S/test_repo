@@ -133,8 +133,9 @@ function saveScore(){
 
         if (JSON.parse(localStorage.getItem("quizHeroHighscores"))) {
             arr = JSON.parse(localStorage.getItem("quizHeroHighscores")); 
-            arr.push(curentUser);  
+            arr.push(curentUser);            
             localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));  
+            sortHighscores();
 
 
         } else {
@@ -146,7 +147,7 @@ function saveScore(){
   
 }
 
-function writeTable(){
+function writeTable() {
      // remove existing values in table    
     $(".removeTag").each(function(){ $(this).remove()})
 
@@ -160,17 +161,17 @@ function writeTable(){
             let tableRows = $("<tr/>");
             tableRows.html( 
                 `
-                <td class="user display-6 text-center removeTag">
-                    <p class="pt-2 text-info">${highscoresArr[i].user}</p>
+                <td class="user display-8 text-center removeTag">
+                    <p class="pt-2 text-secondary">${highscoresArr[i].user}</p>
                 </td>
-                <td class="level display-6 text-center removeTag">
-                    <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
+                <td class="level display-8 text-center removeTag">
+                    <p class="pt-2 text-secondary">${highscoresArr[i].difficulty}</p>
                 </td> 
-                <td class="score display-6 text-center removeTag">              
-                    <p class="pt-2 text-info">${highscoresArr[i].score}</p>
+                <td class="score display-8 text-center removeTag">              
+                    <p class="pt-2 text-secondary">${highscoresArr[i].score}</p>
                 </td>     
-                <td class="icon display-6 text-center removeTag">
-                    <p class="pt-2 text-info"></p>
+                <td class="icon display-8 text-center removeTag">
+                    <p class="pt-2 text-secondary"></p>
                 </td>               
                 `
             ).appendTo($("#tBody"))            
@@ -189,6 +190,13 @@ function clearDiv() {
     }
 }
 
+function sortHighscores() {
+    let highscoresSorted = JSON.parse(localStorage.getItem("quizHeroHighscores"));
+    highscoresSorted.sort((a, b) => a.score - b.score).reverse();
+
+    localStorage.setItem('quizHeroHighscores', JSON.stringify(highscoresSorted));
+}
+
 
 // ** MODALS **
 
@@ -205,7 +213,7 @@ $( function() {
         duration: 1000
       },
       width: 305,
-      height: 230,
+      height: 230      
     }).attr("class", "text-center m-2");
  
     $( "#help" ).on( "click", function() {
@@ -317,6 +325,7 @@ $( function() {
         duration: 1000
       },
       width: 600,
+      title: "HIGHSCORES"
     //   height: 600,
     }).attr("class", "text-center m-2");
  
