@@ -12,7 +12,10 @@ body {
     background: linear-gradient(90deg, rgba(2,0,36,1) 20%, rgba(48,7,75,1) 40%, rgba(32,9,60,1) 63%, rgba(10,10,96,1) 86%, rgba(56,8,62,1) 100%);
   }
 
-
+.bg-light{
+    --bs-bg-opacity: 0;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
 
 
 
