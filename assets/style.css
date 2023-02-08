@@ -5,6 +5,32 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+@media only screen and (max-width: 991px) {
+    .mx-5 {
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
+
+    .nav-item {
+        max-width: 25%;
+        border: solid;
+        border-radius: 15px;
+        border-width: 1px;
+        border-color: white;
+    }
+    .nav-link:hover {
+        transform: scale(1.0);
+    }
+    #home:hover{
+        transform: scale(1.0);
+    }
+}
+
+
 
 /* This will fill all the middle section of the main page, between navbar and footer -TH*/
 body {
@@ -16,6 +42,65 @@ body {
     --bs-bg-opacity: 0;
     background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
 }
+
+.navbar{
+    padding-top: 1%;
+}
+
+.navbar-toggler{
+    border:solid;
+    border-radius: 15px;
+    border-width: 1px;
+    border-color: white;
+    padding-top: 1%;
+}
+.fa-bars{
+    color:white;
+}
+
+.choices button{
+    border:solid;
+    padding: 2%;
+    border-radius: 15px;
+    border-width: 1px;
+    color: white;
+    border-color: white;
+    background-color: rgba(128, 128, 128, 0.466);
+    min-width: 10%;
+    max-width: 20%;
+}
+
+.nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: rgb(235, 153, 59);
+    text-decoration: none;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.nav-item{
+    border-radius: 15px;
+    border-width: 1px;
+    border-color: white;
+}
+
+#home{
+    color: rgb(235, 153, 59);
+    transition: all .2s ease-in-out;
+}
+
+.nav-link:hover {
+    transform: scale(1.1);
+    color: rgb(235, 153, 59);
+    transition: all .2s ease-in-out;
+}
+
+#home:hover{
+    transform: scale(1.1);
+}
+
 
 
 
@@ -60,7 +145,7 @@ h3 {
 } */
 
 .hints {
-        border-width: 1px;
+    border-width: 1px;
     display: flex;
     justify-content: center;
 
@@ -71,15 +156,30 @@ h3 {
     height: 95px;
     text-align: center;
     margin: 2px auto;
-    border: 6px solid orange;
+    border: 1px solid orange;
     font-size: 20px;
 
   }
 
+.hints {
+    gap: 4%;
+}
+
   .btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: rgb(29, 29, 41);
+    --bs-btn-border-color: none;
   }
+
+.form-select{
+    background-color: transparent;
+    color: white;
+}
+
+option{
+    border: 1px solid #fff;
+    background-color: #000000;
+}
 
 
 
@@ -88,7 +188,7 @@ h3 {
     margin-bottom: 10px;
   }
   
-  @media (min-width: 576px) {
+@media (min-width: 576px) {
     .main {
       width: calc(33.33% - 10px);
       margin-bottom: 20px;
@@ -173,10 +273,14 @@ h3 {
     cursor:pointer;
 }
 
-.social-icons a {
+.social-icons{
     display: flex;
-    margin-left: 35%;
-
+    justify-content: center;
+    align-items:center;
+    margin: auto;
+    width: 50%;
+    gap: 5%;
+    max-width: 50%;
 }
 
 .footer p {

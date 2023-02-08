@@ -84,7 +84,7 @@ function WrongAnswer(){
 
 function NextQuestion(){
     questionNumber++
-    $("#question-title").css("backgroundColor", "white");
+    $("#question-title").css("backgroundColor", "transparent");
     if(questionNumber < limit){
         DisplayQuestion();
     }
