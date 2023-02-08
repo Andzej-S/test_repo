@@ -7,46 +7,14 @@ var livesAmount = 3;
 var questions = document.getElementById('questions');
 var scoreElement = document.getElementById('score');
 var lives = document.getElementById('lives');
-var submitBtn = document.getElementById('submit');
+// var submitBtn = document.getElementById('submit');
+var submitBtn = $('#submit');
 var score = [0,1,2,3,4,5,6,7,8,9,10];
 var limit = score.length - 1;
 var newScore = 0;
 let difficultyValue;
 let arrWrongAnswersSelect = []; 
 // localStorage.clear();
-
-
-$("#play-button").on("click", function() {
-    var categorySelect = $('#category');
-    var categoryValue = categorySelect.val();
-    var difficulty = $('#difficulty');
-    difficultyValue = difficulty.val();
-
-    if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
-        console.log("Please select a category and difficulty!");
-        return;
-    }
-
-    // when play button is clicked hides a div with play button and unhides divs with quiz and score code
-    $(".wrapper .container:first-child").addClass("d-none");
-    $(".wrapper .container:nth-child(2)").removeClass("d-none");
-    $(".wrapper .container:nth-child(3)").removeClass("d-none");
-
-    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
-    
-    $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
-      .then(function(response) {
-        quiz = response;
-        console.log(response);
-        $("#play-button").html("Quiz Started!");
-        DisplayQuestion();
-      });
-      /*$("#button2").on("click", function() {
-        console.log("The answer to the question is : " + quiz[questionNumber].correctAnswer);*/
-    })
 
 
 function findElementByText(text) {
@@ -56,7 +24,6 @@ function findElementByText(text) {
         $(jSpot).addClass("d-none")
     }   
 }
-
 
 function DisplayQuestion(){   
     newScore = score[questionNumber];
@@ -97,13 +64,11 @@ function DisplayQuestion(){
     }    
 } // end of DisplayQuestion()
 
-
 function CorrectAnswer(){
     document.getElementById("question-title").style.backgroundColor = "green";
     newScore = score[questionNumber + 1];
     scoreElement.textContent = newScore;
 }
-
 
 function WrongAnswer(){
     document.getElementById("question-title").style.backgroundColor = "red";
@@ -118,10 +83,9 @@ function WrongAnswer(){
     setTimeout(NextQuestion, 1000);
 }
 
-
 function NextQuestion(){
     questionNumber++
-    document.getElementById("question-title").style.backgroundColor = "white";
+    $("#question-title").css("backgroundColor", "white");
     if(questionNumber < limit){
         DisplayQuestion();
     }
@@ -129,11 +93,10 @@ function NextQuestion(){
         setTimeout(EndQuiz, 1000);
 }
 
-
 function EndQuiz(){
     //hide questions and answers, show hidden divs
     lives.innerHTML = livesAmount;
-    submitBtn.addEventListener("click", saveScore());
+    submitBtn.on("click", saveScore);
     $("#mainQuiz").addClass("d-none");
     $("#submitInitials").removeClass("d-none");
     // if the user wins, do this
@@ -147,44 +110,74 @@ function YouLost(){
     console.log("you lost");
 }
 
-function fetchSetLocalHighscores(user) {
-    let arr;
-
-    if (localStorage.getItem('quizHeroHighscores')) {
-        arr = JSON.parse(localStorage.getItem('quizHeroHighscores')); 
-        arr.push(user);  
-        localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));     
-
-    } else {
-        arr.push(user);
-        localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));
-    } 
+function YouWon(){
+    console.log("You Win!");
+    EndQuiz();
 }
 
-
 function saveScore(){
-  submitBtn.onclick = function(){
-    // Grab the value of the 'initials' element
-    let initials = $('#initials').val();    
-    // Create a new object with the current score and the initials
-    let curentUser = {
-        "score" : newScore,
-        "user" : initials,
-        "difficulty" : difficultyValue
+    // submitBtn.on = ("click", function(){
+        // Grab the value of the 'initials' element
+        let initials = $('#initials').val();    
+        // Create a new object with the current score and the initials
+        let curentUser = {
+            "score" : newScore,
+            "user" : initials,
+            "difficulty" : difficultyValue
+        }
+
+        console.log(curentUser)
+
+        // write curentUser to localStorage
+        let arr = [];
+
+        if (JSON.parse(localStorage.getItem("quizHeroHighscores"))) {
+            arr = JSON.parse(localStorage.getItem("quizHeroHighscores")); 
+            arr.push(curentUser);  
+            localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));  
+
+
+        } else {
+            arr.push(curentUser);
+            localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));
+        } 
+    // });
+  
+}
+
+function writeTable(){
+     // remove existing values in table    
+    $(".removeTag").each(function(){ $(this).remove()})
+
+    // add from local storage
+    $("#highscoreTable").removeClass("d-none");
+    let highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores'));
+
+    if (localStorage.getItem('quizHeroHighscores')) {
+        
+        for(let i = 0; i < highscoresArr.length; i++){
+            let tableRows = $("<tr/>");
+            tableRows.html( 
+                `
+                <td class="user display-5 text-center removeTag">
+                    <p class="pt-2 text-info">${highscoresArr[i].user}</p>
+                </td>
+                <td class="level display-5 text-center removeTag">
+                    <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
+                </td> 
+                <td class="score display-5 text-center removeTag">              
+                    <p class="pt-2 text-info">${highscoresArr[i].score}</p>
+                </td>     
+                <td class="icon display-5 text-center removeTag">
+                    <p class="pt-2 text-info"></p>
+                </td>               
+                `
+            ).appendTo($("#tBody"))
+            console.log($("#tBody").html())
+        }
+    } else {
+        console.log("no results saved!")
     }
-    
-    fetchSetLocalHighscores(curentUser);
-
-
-    // get existing data from local storage
-    // var existingScores = JSON.parse(localStorage.getItem("newScores")) || [];
-    // // add new score to existing data
-    // existingScores.push(newScores);
-    // // save updated data to local storage
-    // localStorage.setItem("newScores", JSON.stringify(existingScores));
-    // console.log(localStorage.getItem('newScores'));
-  }
-
 }
 
 // clear old gif from div tag
@@ -195,6 +188,7 @@ function clearDiv() {
         console.log(error)
     }
 }
+
 
 // ** MODALS **
 
@@ -310,6 +304,39 @@ $( function() {
     });
 });
 
+
+//  BTN EVENT LISTENERS
+$("#play-button").on("click", function() {
+    var categorySelect = $('#category');
+    var categoryValue = categorySelect.val();
+    var difficulty = $('#difficulty');
+    difficultyValue = difficulty.val();
+
+    if(categoryValue == "Category" || difficultyValue == "Difficulty Level"){
+        console.log("Please select a category and difficulty!");
+        return;
+    }
+
+    // when play button is clicked hides a div with play button and unhides divs with quiz and score code
+    $(".wrapper .container:first-child").addClass("d-none");
+    $(".wrapper .container:nth-child(2)").removeClass("d-none");
+    $(".wrapper .container:nth-child(3)").removeClass("d-none");
+
+    var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
+    
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    })
+      .then(function(response) {
+        quiz = response;
+        console.log(response);
+        $("#play-button").html("Quiz Started!");
+        DisplayQuestion();
+      });
+    })
+
+
 // Let's start button function and hide functionality
 $("#startBtn").on("click", function () {
   
@@ -324,37 +351,5 @@ $("#startBtn").on("click", function () {
     });
 });
 
-function YouWon(){
-    console.log("You Win!");
-    EndQuiz();
-}
-
 // show highscores
-$("#highscores").on("click", function(){
-    // remove existing values in table    
-    $(".removeTag").each(function(){ $(this).remove()})
-
-    // add from local storage
-    $("#highscoreTable").removeClass("d-none");
-    let highscoresArr = JSON.parse(localStorage.getItem('quizHeroHighscores')) || [];
-    
-    for(let i = 0; i < highscoresArr.length; i++){
-        let tableRows = $("<tr/>");
-        tableRows.html( 
-            `
-            <td class="user display-5 text-center removeTag">
-                <p class="pt-2 text-info">${highscoresArr[i].user}</p>
-            </td>
-            <td class="level display-5 text-center removeTag">
-                <p class="pt-2 text-info">${highscoresArr[i].difficulty}</p>
-            </td> 
-            <td class="score display-5 text-center removeTag">              
-                <p class="pt-2 text-info">${highscoresArr[i].score}</p>
-            </td>     
-            <td class="icon display-5 text-center removeTag">
-                <p class="pt-2 text-info">13543</p>
-            </td>               
-            `
-        ).appendTo($("#tBody"))
-    }
-});
+$("#highscores").on("click", writeTable);
