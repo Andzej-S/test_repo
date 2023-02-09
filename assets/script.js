@@ -92,15 +92,19 @@ function NextQuestion(){
         setTimeout(EndQuiz, 1000);
 }
 
-function EndQuiz(){
+function EndQuiz() {
     //hide questions and answers, show hidden divs
     lives.innerHTML = livesAmount;
     submitBtn.on("click", saveScore);
     $("#mainQuiz").addClass("d-none");
     $("#submitInitials").removeClass("d-none");
-    // if the user wins, do this
-    if(newScore == 10){
-        // TODO ----------------------------------------------- INSERT COOL GIF OR ANIMATION OR SOMETHING FOR GETTING 10!!!
+
+    // if the user scores more points than the smallest number in the table, do this
+    let localStore = JSON.parse(localStorage.getItem("quizHeroHighscores"));
+    let minScore = localStore[localStore.length].score
+
+    if (newScore > minScore) {
+        showGifNewHighScore();
         console.log("You Won!");
     }
 }
@@ -196,8 +200,39 @@ function sortHighscores() {
     localStorage.setItem('quizHeroHighscores', JSON.stringify(highscoresSorted));
 }
 
+function showGifNewHighscore() {
+    // show gif for new HS
+    $(function () {
+        $("#maxPoints").removeClass("d-none");
+        $("#gifMaxPoints").css({
+            "max-width": "100%",
+            "max-height": "100%"
+        });
+
+        // RUN: new high score GIF modal
+        $("#maxPoints").dialog("open")
+    });
+}
 
 // ** MODALS **
+
+// DEFINE: new high score GIF modal
+$(function () {
+    $("#dialogHelp").dialog({
+        autoOpen: false,
+        show: {
+            effect: "blind",
+            duration: 500
+        },
+        hide: {
+            effect: "explode",
+            duration: 1000
+        },
+        width: 305,
+        height: 230
+    })
+})
+
 
 // begin How to play modal
 $( function() {
