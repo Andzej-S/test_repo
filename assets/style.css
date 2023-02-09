@@ -13,29 +13,6 @@ html {
     scroll-behavior: smooth;
 }
 
-@media only screen and (max-width: 991px) {
-    .mx-5 {
-        margin-right: 0!important;
-        margin-left: 0!important;
-    }
-
-    .nav-item {
-        max-width: 25%;
-        border: solid;
-        border-radius: 15px;
-        border-width: 1px;
-        border-color: white;
-    }
-    .nav-link:hover {
-        transform: scale(1.0);
-    }
-    #home:hover{
-        transform: scale(1.0);
-    }
-}
-
-
-
 /* This will fill all the middle section of the main page, between navbar and footer -TH*/
 body {
     background: rgb(2,0,36);
@@ -68,7 +45,7 @@ body {
     align-items: center;
   }
   
-  .choices button {
+.choices button {
     border: solid;
     padding: 2%;
     border-radius: 15px;
@@ -80,7 +57,7 @@ body {
     max-width: 20%;
     margin: 20px;
     align-items: center;
-  }
+}
 
 .nav-link {
     display: block;
@@ -112,9 +89,6 @@ body {
 #home:hover{
     transform: scale(1.1);
 }
-
-
-
   
 .container {
     color: orange;
@@ -128,7 +102,7 @@ body {
 
 .img-fluid {
     width: 100%;
-  }
+}
 
 h3 {
     color: orange;
@@ -143,26 +117,11 @@ h3 {
     text-align: center;
 }
 
-/* .choices {
-    border-style: solid;
-    border-width: 1px;
-    min-height: 15rem;
-    border-radius: 2px;
-
-} */
-
-
-/* .lives {
-    border-style: solid;
-    border-width: 1px;
-    min-height: 2.5rem;
-} */
-
 .hints {
     border-width: 1px;
     display: flex;
     justify-content: center;
-
+    gap: 4%;
 }
 
 .hints button {
@@ -175,15 +134,11 @@ h3 {
 
   }
 
-.hints {
-    gap: 4%;
-}
-
-  .btn-primary {
+.btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: rgb(29, 29, 41);
     --bs-btn-border-color: none;
-  }
+}
 
 .form-select{
     background-color: transparent;
@@ -195,20 +150,10 @@ option{
     background-color: #000000;
 }
 
-
-
 .main {
     width: 100%;
     margin-bottom: 10px;
-  }
-  
-@media (min-width: 576px) {
-    .main {
-      width: calc(33.33% - 10px);
-      margin-bottom: 20px;
-    }
-  }
-
+}
 
 #score,
 #lives {
@@ -220,21 +165,22 @@ option{
     display: inline-block;
     vertical-align: middle;
     color: white;
-   font-weight: bold;
+    font-weight: bold;
   }
 
-  .lives, .score {
+.lives,
+.score {
     color: white;
     margin-bottom: 10px;
     margin-top: 4px;
     width: 90px;
     height: 40px;
     font-weight: bold;
- }
+}
   
 
+/* FOOTER SECTION*/
 
-/* footer section*/
 .footer {
     position: fixed;
     left: 0;
@@ -243,6 +189,9 @@ option{
     background: black;
     color: white;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 1rem;
 }
 
 .footer div {
@@ -251,15 +200,6 @@ option{
 
 .copyright {
     margin-top: 20px;
-}
-
-.col-1, .col-2, .col-3 {
-    width: 30%;
-    padding: 10px; 
-  }
-
-.col-2 {
-    flex-grow:2;
 }
 
 .footer div h3 {
@@ -296,10 +236,101 @@ option{
    display: inline;
 }
 
+.about-us,
+.contact {
+width: 100%;
+}
+
+/* END OF FOOTER SECTION */
+
+
+.ui-widget-content {
+	border: 1px solid #dddddd;
+	background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
+	color: #1b1b1b;
+}
+
+
+#resetScores:hover{
+    color:#f8c245
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+
+.tooltip {
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.tooltip .tooltiptext { 
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+
+}
+.tooltip:hover tooltiptext{
+    visibility: visible;
+}
 
 .giphyImg {
     border-radius: 8px;
     max-width:100%;
     max-height:100%;
     background-color: grey;
+}
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 991px) {
+    .mx-5 {
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
+
+    .nav-item {
+        max-width: 25%;
+        border: solid;
+        border-radius: 15px;
+        border-width: 1px;
+        border-color: white;
+    }
+    .nav-link:hover {
+        transform: scale(1.0);
+    }
+    #home:hover{
+        transform: scale(1.0);
+    }
+}
+
+@media (min-width: 576px) {
+    .main {
+      width: calc(33.33% - 10px);
+      margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+}
+
+@media (min-width: 576px) {
+    .main {
+      width: calc(33.33% - 10px);
+      margin-bottom: 20px;
+    }
 }
