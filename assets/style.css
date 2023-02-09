@@ -95,6 +95,12 @@ body {
     align-items: center;
 }
 
+.choices button:hover {
+    box-shadow: 0 0 5px #ffc000, 0 0 20px #ffc000, 0 0 60px #ffc000, 0 0 150px #ffc000;
+    background-color: #ffc000;
+    outline: none;
+}
+
 .nav-link {
     display: block;
     padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
