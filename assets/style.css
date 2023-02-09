@@ -259,7 +259,7 @@ option{
 /* FOOTER SECTION*/
 
 .footer {
-    position: fixed;
+    margin-top: 5rem;
     left: 0;
     bottom: 0;
     width: 100%;
