@@ -96,8 +96,8 @@ function EndQuiz() {
     //hide questions and answers, show hidden divs
     lives.innerHTML = livesAmount;
     submitBtn.on("click", saveScore);
-    $("#mainQuiz").addClass("d-none");
-    $("#submitInitials").removeClass("d-none");
+    $("#mainQuiz").addClass("opacity-0");
+    $("#submitInitials").removeClass("opacity-0");
 
     // if the user scores more points than the smallest number in the table, do this
     
@@ -391,9 +391,9 @@ $("#play-button").on("click", function() {
     }
 
     // when play button is clicked hides a div with play button and unhides divs with quiz and score code
-    $(".wrapper .container:first-child").addClass("d-none");
-    $(".wrapper .container:nth-child(2)").removeClass("d-none");
-    $(".wrapper .container:nth-child(3)").removeClass("d-none");
+    $(".wrapper .container:first-child").addClass("opacity-0");
+    $(".wrapper .container:nth-child(2)").removeClass("opacity-0");
+    $(".wrapper .container:nth-child(3)").removeClass("opacity-0");
 
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
     
@@ -414,7 +414,7 @@ $("#startBtn").on("click", function () {
   
     // When Let's start button is clicked it changes text and unhides play button div
     $(this).text("Restart Quiz");
-    $(".wrapper").removeClass("d-none");
+    $(".wrapper").removeClass("opacity-0");
 
     // When Restart Quiz button is clicked it reloads the page
     $(this).click(function() {
