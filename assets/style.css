@@ -112,7 +112,7 @@ body {
 }
 
 .nav-item{
-    border-radius: 15px;
+    border-radius: 2px;
     border-width: 1px;
     border-color: white;
 }
@@ -390,16 +390,25 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
         margin-right: 0!important;
         margin-left: 0!important;
     }
-
+    .container-fluid {
+        margin-left: 20px;
+    }
     .nav-item {
         max-width: 25%;
         border: solid;
-        border-radius: 15px;
+        border-radius: 10px;
         border-width: 1px;
         border-color: white;
+        margin-top: 10px;
+    }     
+    .navbar-collapse {
+        margin-top: 20px;        
     }
     .nav-link:hover {
         transform: scale(1.0);
+    }
+    .nav-link {
+        margin-left: 20px;
     }
     #home:hover{
         transform: scale(1.0);
