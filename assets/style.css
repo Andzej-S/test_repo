@@ -34,6 +34,13 @@ html {
     }
 }
 
+/* shifted the quiz image to the right -TH */
+.col-lg-7 {
+    flex: 0 0 auto;
+    width: 66.333333%;
+}
+
+
 
 
 /* This will fill all the middle section of the main page, between navbar and footer -TH*/
@@ -232,6 +239,27 @@ option{
     font-weight: bold;
  }
   
+/* Submitting your initials after completing the quiz -TH */
+#submitInitials {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding-top: 240px;
+    text-align: center;
+    color: orange;
+  }
+
+  button#submit {
+    width: 85px;
+    height: 29px;
+    border-radius: 10px;
+  }
+
+
+
 
 
 /* footer section*/
@@ -302,4 +330,12 @@ option{
     max-width:100%;
     max-height:100%;
     background-color: grey;
+}
+
+
+@media (min-width: 768px) {
+    .about-us,
+    .contact {
+        width: calc(50% - 20px);
+    }
 }
