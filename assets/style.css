@@ -13,26 +13,40 @@ html {
     scroll-behavior: smooth;
 }
 
-@media only screen and (max-width: 991px) {
-    .mx-5 {
-        margin-right: 0!important;
-        margin-left: 0!important;
-    }
-
-    .nav-item {
+/* .nav-item {
         max-width: 25%;
         border: solid;
         border-radius: 15px;
         border-width: 1px;
         border-color: white;
-    }
+    } */
     .nav-link:hover {
         transform: scale(1.0);
     }
     #home:hover{
         transform: scale(1.0);
     }
-}
+
+    .navbar{
+        padding-top: 15px;
+        width: 100%;
+        height: 60px;
+        background: rgb(7, 1, 35);
+        font-size: large;
+       
+        }
+    
+    .navbar-toggler{
+        border:solid;
+        border-radius: 15px;
+        border-width: 1px;
+        border-color: white;
+        padding-top: 1%;
+        display: inline-block;
+    }
+    
+
+
 
 /* shifted the quiz image to the right -TH */
 .col-lg-7 {
@@ -54,17 +68,9 @@ body {
     background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
 }
 
-.navbar{
-    padding-top: 20px;
-}
 
-.navbar-toggler{
-    border:solid;
-    border-radius: 15px;
-    border-width: 1px;
-    border-color: white;
-    padding-top: 1%;
-}
+
+
 .fa-bars{
     color:white;
 }
@@ -75,7 +81,7 @@ body {
     align-items: center;
   }
   
-  .choices button {
+.choices button {
     border: solid;
     padding: 2%;
     border-radius: 15px;
@@ -87,7 +93,7 @@ body {
     max-width: 20%;
     margin: 20px;
     align-items: center;
-  }
+}
 
 .nav-link {
     display: block;
@@ -119,9 +125,6 @@ body {
 #home:hover{
     transform: scale(1.1);
 }
-
-
-
   
 .container {
     color: orange;
@@ -135,7 +138,7 @@ body {
 
 .img-fluid {
     width: 100%;
-  }
+}
 
 h3 {
     color: orange;
@@ -150,26 +153,11 @@ h3 {
     text-align: center;
 }
 
-/* .choices {
-    border-style: solid;
-    border-width: 1px;
-    min-height: 15rem;
-    border-radius: 2px;
-
-} */
-
-
-/* .lives {
-    border-style: solid;
-    border-width: 1px;
-    min-height: 2.5rem;
-} */
-
 .hints {
     border-width: 1px;
     display: flex;
     justify-content: center;
-
+    gap: 4%;
 }
 
 .hints button {
@@ -177,20 +165,25 @@ h3 {
     height: 95px;
     text-align: center;
     margin: 2px auto;
-    border: 1px solid orange;
+    border: 1px solid #ce9f11;
     font-size: 20px;
-
+    transition: 0.3s ease;
+    outline: none;
+  }
+  
+  .hints button:hover {
+    box-shadow: 0 0 5px #ffc000, 0 0 20px #ffc000, 0 0 60px #ffc000, 0 0 150px #ffc000;
+    background-color: #ffc000;
+    outline: none;
   }
 
-.hints {
-    gap: 4%;
-}
 
-  .btn-primary {
+
+.btn-primary {
     --bs-btn-color: #fff;
     --bs-btn-bg: rgb(29, 29, 41);
     --bs-btn-border-color: none;
-  }
+}
 
 .form-select{
     background-color: transparent;
@@ -202,20 +195,10 @@ option{
     background-color: #000000;
 }
 
-
-
 .main {
     width: 100%;
     margin-bottom: 10px;
-  }
-  
-@media (min-width: 576px) {
-    .main {
-      width: calc(33.33% - 10px);
-      margin-bottom: 20px;
-    }
-  }
-
+}
 
 #score,
 #lives {
@@ -227,17 +210,18 @@ option{
     display: inline-block;
     vertical-align: middle;
     color: white;
-   font-weight: bold;
+    font-weight: bold;
   }
 
-  .lives, .score {
+.lives,
+.score {
     color: white;
     margin-bottom: 10px;
     margin-top: 4px;
     width: 90px;
     height: 40px;
     font-weight: bold;
- }
+}
   
 /* Submitting your initials after completing the quiz -TH */
 #submitInitials {
@@ -247,7 +231,7 @@ option{
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    padding-top: 240px;
+    padding-top: 280px;
     text-align: center;
     color: orange;
   }
@@ -261,16 +245,19 @@ option{
 
 
 
+/* FOOTER SECTION*/
 
-/* footer section*/
 .footer {
     position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
-    background: black;
+    background: rgb(7, 1, 35);
     color: white;
     display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0.4rem;
 }
 
 .footer div {
@@ -281,20 +268,12 @@ option{
     margin-top: 20px;
 }
 
-.col-1, .col-2, .col-3 {
-    width: 30%;
-    padding: 10px; 
-  }
-
-.col-2 {
-    flex-grow:2;
-}
-
 .footer div h3 {
     font-weight: 200;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
     letter-spacing: 1px;
 }
+
 
 .social-icons {
     margin-top: 20px;
@@ -324,6 +303,54 @@ option{
    display: inline;
 }
 
+.about-us,
+.contact {
+width: 100%;
+padding-bottom: 0.1rem;
+}
+
+/* END OF FOOTER SECTION */
+
+
+.ui-widget-content {
+	border: 1px solid #dddddd;
+	background: #eeeeee url(images/ui-bg_highlight-soft_100_eeeeee_1x100.png) 50% top repeat-x;
+	color: #1b1b1b;
+}
+
+
+#resetScores:hover{
+    color:#f8c245
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+
+.tooltip {
+position: relative;
+display: inline-block;
+border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+.tooltip .tooltiptext { 
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+
+}
+.tooltip:hover tooltiptext{
+    visibility: visible;
+}
 
 .giphyImg {
     border-radius: 8px;
@@ -332,6 +359,50 @@ option{
     background-color: grey;
 }
 
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 991px) {
+    .mx-5 {
+        margin-right: 0!important;
+        margin-left: 0!important;
+    }
+
+    .nav-item {
+        max-width: 25%;
+        border: solid;
+        border-radius: 15px;
+        border-width: 1px;
+        border-color: white;
+    }
+    .nav-link:hover {
+        transform: scale(1.0);
+    }
+    #home:hover{
+        transform: scale(1.0);
+    }
+}
+
+@media (min-width: 576px) {
+    .main {
+      width: calc(33.33% - 10px);
+      margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer {
+      flex-direction: column;
+      align-items: center;
+    }
+}
+
+@media (min-width: 576px) {
+    .main {
+      width: calc(33.33% - 10px);
+      margin-bottom: 20px;
+    }
+}
 
 @media (min-width: 768px) {
     .about-us,
