@@ -97,7 +97,7 @@ function EndQuiz() {
     lives.innerHTML = livesAmount;
     submitBtn.on("click", saveScore);
     $("#mainQuiz").addClass("opacity-0");
-    $("#submitInitials").removeClass("opacity-0");
+    $("#submitInitials").removeClass("d-none");
 
     // if the user scores more points than the smallest number in the table, do this
     
