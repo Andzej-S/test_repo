@@ -321,6 +321,13 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
     }
 }
 
+@media (min-width: 768px) {
+    .about-us,
+    .contact {
+        width: calc(50% - 20px);
+    }
+}
+
 @media (max-width: 767px) {
     .footer {
       flex-direction: column;
