@@ -23,6 +23,14 @@ At the end of the game you will be prompted to input your initials and click "Su
 To access trivia quiz game, please use the link below:
 https://andzej-s.github.io/trivia-quiz-game/
 
+## Server side APIs
+
+Trivia API:
+https://the-trivia-api.com/
+
+GIF API:
+https://developers.giphy.com/
+
 ## Credits
 
 This project is a joint effort of:
