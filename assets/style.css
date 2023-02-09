@@ -311,6 +311,22 @@ padding-bottom: 0.1rem;
 
 /* END OF FOOTER SECTION */
 
+/* MODALS */
+.ui-dialog .ui-dialog-titlebar{
+    text-align: center;
+    max-width:100%;
+    font-size: x-large;    
+}
+
+.ui-widget-content {
+	border: 1px solid #dddddd;
+	color: #333333;
+}
+
+.ui-widget-header {
+	color: #ffffff;
+	font-weight: bold;
+}
 
 .ui-widget-content {
 	border: 1px solid #dddddd;
@@ -318,10 +334,17 @@ padding-bottom: 0.1rem;
 	color: #1b1b1b;
 }
 
+.giphyImg {
+    border-radius: 8px;
+    max-width:100%;
+    max-height:100%;
+    background-color: grey;
+}
 
 #resetScores:hover{
     color:#f8c245
 }
+
 .tooltip {
     position: relative;
     display: inline-block;
@@ -342,22 +365,16 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
     text-align: center;
     border-radius: 6px;
     padding: 5px 0;
-
+  
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-
+      
 }
 .tooltip:hover tooltiptext{
     visibility: visible;
 }
 
-.giphyImg {
-    border-radius: 8px;
-    max-width:100%;
-    max-height:100%;
-    background-color: grey;
-}
 
 
 /* MEDIA QUERIES */
