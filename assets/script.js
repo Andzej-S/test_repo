@@ -100,12 +100,32 @@ function EndQuiz() {
     $("#submitInitials").removeClass("d-none");
 
     // if the user scores more points than the smallest number in the table, do this
-    let localStore = JSON.parse(localStorage.getItem("quizHeroHighscores"));
-    let minScore = localStore[localStore.length].score
+    
+    let maxScore;
 
-    if (newScore > minScore) {
-        showGifNewHighScore();
-        console.log("You Won!");
+    if (JSON.parse(localStorage.getItem("quizHeroHighscores")) !== null) {
+        maxScore = JSON.parse(localStorage.getItem("quizHeroHighscores"))[0].score;
+    }else {
+        maxScore = 0;
+    }
+
+    if (newScore > maxScore) {  
+        // RUN: new high score GIF modal
+        var opt = {
+            autoOpen: false,
+            modal: true,
+            title: 'New Record!'
+        };
+
+        $(document).ready(function() {
+            $("#gifMaxPoints").css({
+                "height": 280,    
+            });
+            $("#maxPoints").dialog(opt).dialog("open");
+            $("#maxPoints").removeClass("d-none")
+        });
+        
+        console.log("New Record!");
     }
 }
 
@@ -119,7 +139,7 @@ function YouWon(){
 }
 
 function saveScore(){
-    // submitBtn.on = ("click", function(){
+
         // Grab the value of the 'initials' element
         let initials = $('#initials').val();    
         // Create a new object with the current score and the initials
@@ -129,7 +149,7 @@ function saveScore(){
             "difficulty" : difficultyValue
         }
 
-        console.log(curentUser)
+
 
         // write curentUser to localStorage
         let arr = [];
@@ -146,7 +166,7 @@ function saveScore(){
             localStorage.setItem('quizHeroHighscores', JSON.stringify(arr));
         }
         $("#submitInitials").addClass("d-none");
-    // });
+
   
 }
 
@@ -180,7 +200,7 @@ function writeTable() {
             ).appendTo($("#tBody"))            
         }
     } else {
-        console.log("no results saved!")
+        console.log("no results saved localy!")
     }
 }
 
@@ -200,19 +220,6 @@ function sortHighscores() {
     localStorage.setItem('quizHeroHighscores', JSON.stringify(highscoresSorted));
 }
 
-function showGifNewHighscore() {
-    // show gif for new HS
-    $(function () {
-        $("#maxPoints").removeClass("d-none");
-        $("#gifMaxPoints").css({
-            "max-width": "100%",
-            "max-height": "100%"
-        });
-
-        // RUN: new high score GIF modal
-        $("#maxPoints").dialog("open")
-    });
-}
 
 // ** MODALS **
 
@@ -227,11 +234,11 @@ $(function () {
         hide: {
             effect: "explode",
             duration: 1000
-        },
-        width: 305,
-        height: 230
-    })
-})
+        }
+        // width: 305,
+        // height: 230
+    });
+});
 
 
 // begin How to play modal
@@ -396,7 +403,6 @@ $("#play-button").on("click", function() {
     })
       .then(function(response) {
         quiz = response;
-        console.log(response);
         $("#play-button").html("Quiz Started!");
         DisplayQuestion();
       });
