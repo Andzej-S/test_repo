@@ -14,9 +14,11 @@ You will also notice "Lives" and "Score" below the quiz. You will get three live
 
 At the end of the game you will be prompted to input your initials and click "Submit" button, after which your score, difficulty mode and initials will be saved locally. You can access it by clicking on "Highscores" in the navigation menu. There is also an option to reset the highscores, by pressing "Reset Highscores" button within the modal.
 
-## Screenshot
+## Screenshots
 
-![Screenshot-of-trivia-quiz-game](/assets/images/screenshot.png)
+![Screenshot-of-trivia-quiz-game-desktop](/assets/images/dscreenshot.png)
+
+![Screenshot-of-trivia-quiz-game-mobile](/assets/images/mscreenshot.png)
 
 ## Link
 
