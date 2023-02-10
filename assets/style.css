@@ -9,7 +9,7 @@
 /* END OF GLOBAL RESET AND RULES */
 
 
-/* START OF ELEMENT OR WIDESPREAD TARGETING */
+/* START OF WIDESPREAD TARGETING */
 /* This will fill all the middle section of the main page, between navbar and footer -TH*/
 body {
     background: rgb(2,0,36);
@@ -34,7 +34,7 @@ option {
     margin-top: 20px;  
     padding: 10px;
 }
-/* END OF ELEMENT OR WIDESPREAD TARGETING */
+/* END OF WIDESPREAD TARGETING */
 
 
 /* START OF NAVIGATION SECTION */
@@ -83,11 +83,6 @@ option {
     box-shadow: none;
 }
 
-/* Shifted the quiz image to the right -TH */
-/* .col-lg-7 {
-    flex: 0 0 auto;
-    width: 66.333333%;
-} */
 /* END OF HERO BANNER */
 
 
@@ -123,6 +118,14 @@ option {
 .btn-primary {
     min-width: 150px;
     --bs-btn-bg: rgb(29, 29, 41);
+    border: 1px solid #ce9f11;
+    margin: 5px auto;
+    font-size: 1em;
+}
+
+.btn-secondary {
+    min-width: 150px;
+    --bs-btn-bg: rgb(184, 184, 184);
     border: 1px solid #ce9f11;
     margin: 5px auto;
     font-size: 1em;
@@ -204,24 +207,27 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
 
 
 /* START OF FOOTER SECTION*/
-.footer {
+footer {
     margin-top: 12.5rem;
     width: 100%;
     background: rgb(7, 1, 35);
     color: white;
     justify-content: space-between;
     padding: 0.4rem;
+    position: relative;
+    bottom: 0;
 }
 
-.footer div {
-    text-align: center;
-}
-
-.footer blockquote {
+footer p {
     font-size: smaller;
     color: grey;
     display: inline;
     font-size: 1.0rem;
+}
+
+footer a {
+    display: block;
+    text-align: center;
 }
 
 .social-icons {
@@ -306,6 +312,11 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
     }
     .nav-link {
         margin-left: 20px;
+    }
+    .lc-block{
+        display: flex;
+        align-items: center;
+        justify-content: center; 
     }
 }
 /* END OF MEDIA QUERIES */

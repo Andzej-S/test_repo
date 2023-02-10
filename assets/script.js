@@ -43,18 +43,18 @@ function DisplayQuestion(){
         `<div class="container m-20">
             <div class="row">
                 <div class="col-6 text-center hints">
-                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[0]}</button>
+                    <button type="button" class=" choiceBtn btn btn-primary">${allAnswers[0]}</button>
                 </div>
                 <div class="col-6 text-center hints">
-                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[1]}</button>
+                    <button type="button" class=" choiceBtn btn btn-primary">${allAnswers[1]}</button>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 text-center hints">
-                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[2]}</button>
+                    <button type="button" class=" choiceBtn btn btn-primary">${allAnswers[2]}</button>
                 </div>
                 <div class="col-6 text-center hints">
-                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[3]}</button>
+                    <button type="button" class=" choiceBtn btn btn-primary">${allAnswers[3]}</button>
                 </div>
             </div>
         </div>
@@ -293,7 +293,7 @@ $( function() {
     });
  
     $("#hint").on( "click", function() {
-        if($("#hint").attr("class") === "main btn btn-secondary"){
+        if($("#hint").attr("class") === "btn btn-secondary"){
             $( "#divError" ).dialog( "open" );           
         } else {
             let keyword = quiz[questionNumber].correctAnswer;
@@ -327,7 +327,7 @@ $( function() {
                 });
 
                 $("#hint").removeClass("btn-primary")
-                $("#hint").addClass("main btn btn-secondary")
+                $("#hint").addClass("btn btn-secondary")
                 
             }); //end of .then           
         }
@@ -353,7 +353,7 @@ $( function() {
 
  
     $("#fifty-fifty").on( "click", function() {
-        if($("#fifty-fifty").attr("class") === "main btn btn-secondary"){
+        if($("#fifty-fifty").attr("class") === "btn btn-secondary"){
             $( "#divError" ).dialog("open");       
  
         }else{
