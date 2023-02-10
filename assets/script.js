@@ -3,15 +3,13 @@
 var quiz;
 var questionNumber = 0;
 var livesAmount = 3;
-//var main = document.getElementById('main');
-var questions = document.getElementById('questions');
-var scoreElement = document.getElementById('score');
-var lives = document.getElementById('lives');
-// var submitBtn = document.getElementById('submit');
-var submitBtn = $('#submit');
-var score = [0,1,2,3,4,5,6,7,8,9,10];
-var limit = score.length - 1;
-var newScore = 0;
+var questions = $('#questions');
+var scoreElement = $('#score');
+var lives = $('#lives');
+let submitBtn = $('#submit');
+let score = [0,1,2,3,4,5,6,7,8,9,10];
+let limit = score.length - 1;
+let newScore = 0;
 let difficultyValue;
 let arrWrongAnswersSelect = []; 
 
@@ -26,36 +24,52 @@ function findElementByText(text) {
 
 function DisplayQuestion(){   
     newScore = score[questionNumber];
-    scoreElement.textContent = newScore;
-    lives.innerHTML = livesAmount;
-    var allAnswers = [];
-    choices.innerHTML = "";
-    document.getElementById("question-title").innerHTML = quiz[questionNumber].question;
+    scoreElement.html(newScore);
+    lives.html(livesAmount);
+    let allAnswers = [];
+    $("#choices").html("");
+    $("#question-title").html(quiz[questionNumber].question);
 
     // loop through each incorrect answer and add to array
-    for (var i = 0; i < quiz[questionNumber].incorrectAnswers.length; i++){
+    for (let i = 0; i < quiz[questionNumber].incorrectAnswers.length; i++){
         allAnswers.push(quiz[questionNumber].incorrectAnswers[i]); // push incorrect answers to array
     }
 
     allAnswers.push(quiz[questionNumber].correctAnswer); // push correct answer to array
     allAnswers.sort(() => Math.random() - 0.5);
     
-    for (var i = 0; i < allAnswers.length; i++){
-        var choiceBtn = document.createElement("button");
-        choiceBtn.textContent = allAnswers[i];
-        choices.appendChild(choiceBtn);
-        if(quiz[questionNumber].correctAnswer == allAnswers[i]){
-            $(choiceBtn).on("click", function() {
+    // generate the choices
+    $("#choices").html(
+        `<div class="container m-20">
+            <div class="row">
+                <div class="col-6 text-center hints">
+                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[0]}</button>
+                </div>
+                <div class="col-6 text-center hints">
+                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[1]}</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 text-center hints">
+                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[2]}</button>
+                </div>
+                <div class="col-6 text-center hints">
+                    <button type="button" class="main choiceBtn btn btn-primary">${allAnswers[3]}</button>
+                </div>
+            </div>
+        </div>
+        `);
+
+    $(".choiceBtn").each(function(index, element) {
+        $(this).on("click", function() {
+            if ($(this).html() === quiz[questionNumber].correctAnswer) {
                 CorrectAnswer();
                 setTimeout(NextQuestion, 1000);
-            })
-        }
-        else{
-            $(choiceBtn).on("click", function() {
+            } else {
                 WrongAnswer();
-            })
-        }
-    }
+            }
+        });
+    });
 
     // collect 2 wrong answers for 50-50
     for (let j=0; j<2; j++){
@@ -64,13 +78,13 @@ function DisplayQuestion(){
 } // end of DisplayQuestion()
 
 function CorrectAnswer(){
-    document.getElementById("question-title").style.backgroundColor = "green";
+    $("#question-title").css("backgroundColor", "green");
     newScore = score[questionNumber + 1];
     scoreElement.textContent = newScore;
 }
 
 function WrongAnswer(){
-    document.getElementById("question-title").style.backgroundColor = "red";
+    $("#question-title").css("backgroundColor", "red");
     if(livesAmount <= 1){
         livesAmount--;
         setTimeout(YouLost, 1000);
@@ -96,7 +110,7 @@ function EndQuiz() {
     //hide questions and answers, show hidden divs
     lives.innerHTML = livesAmount;
     submitBtn.on("click", saveScore);
-    $("#mainQuiz").addClass("d-none");
+    $("#mainQuiz").addClass("opacity-0");
     $("#submitInitials").removeClass("d-none");
 
     // if the user scores more points than the smallest number in the table, do this
@@ -130,7 +144,7 @@ function EndQuiz() {
 }
 
 function YouLost(){
-    console.log("you lost");
+    console.log("Quiz Ended. Wrong Answer");
 }
 
 function YouWon(){
@@ -148,7 +162,6 @@ function saveScore(){
             "user" : initials,
             "difficulty" : difficultyValue
         }
-
 
 
         // write curentUser to localStorage
@@ -380,6 +393,7 @@ $( function() {
 
 //  BUTTONS EVENT LISTENERS
 $("#play-button").on("click", function() {
+    
     var categorySelect = $('#category');
     var categoryValue = categorySelect.val();
     var difficulty = $('#difficulty');
@@ -391,12 +405,13 @@ $("#play-button").on("click", function() {
     }
 
     // when play button is clicked hides a div with play button and unhides divs with quiz and score code
-    $(".wrapper .container:first-child").addClass("d-none");
-    $(".wrapper .container:nth-child(2)").removeClass("d-none");
-    $(".wrapper .container:nth-child(3)").removeClass("d-none");
-
+    $(".wrapper .container:first-child").addClass("opacity-0");
+    $(".wrapper .container:nth-child(2)").removeClass("opacity-0");
+    $(".wrapper .container:nth-child(3)").removeClass("opacity-0");
+  
     var queryURL = "https://the-trivia-api.com/api/questions?categories=" + categoryValue + "&limit=" + limit + "&difficulty=" + difficultyValue;
     
+
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -406,11 +421,11 @@ $("#play-button").on("click", function() {
         $("#play-button").html("Quiz Started!");
         DisplayQuestion();
       });
-    })
+})
 
 
 // Let's start button function and hide functionality
-$("#startBtn").on("click", function () {
+$("#startBtn").on("click", function() {
   
     // When Let's start button is clicked it changes text and unhides play button div
     $(this).text("Restart Quiz");
