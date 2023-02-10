@@ -111,6 +111,7 @@ function EndQuiz() {
     lives.innerHTML = livesAmount;
     submitBtn.on("click", saveScore);
     $("#mainQuiz").addClass("opacity-0");
+    $("#mainQuiz").addClass("opacity-0");
     $("#submitInitials").removeClass("d-none");
 
     // if the user scores more points than the smallest number in the table, do this
@@ -429,7 +430,7 @@ $("#startBtn").on("click", function() {
   
     // When Let's start button is clicked it changes text and unhides play button div
     $(this).text("Restart Quiz");
-    $(".wrapper").removeClass("d-none");
+    $(".wrapper").removeClass("opacity-0");
 
     // When Restart Quiz button is clicked it reloads the page
     $(this).click(function() {
