@@ -16,8 +16,10 @@ At the end of the game you will be prompted to input your initials and click "Su
 
 ## Screenshots
 
+Desktop view:
 ![Screenshot-of-trivia-quiz-game-desktop](/assets/images/dscreenshot.png)
 
+Mobile view:
 ![Screenshot-of-trivia-quiz-game-mobile](/assets/images/mscreenshot.png)
 
 ## Link
