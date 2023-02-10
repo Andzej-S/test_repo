@@ -430,7 +430,7 @@ $("#startBtn").on("click", function() {
   
     // When Let's start button is clicked it changes text and unhides play button div
     $(this).text("Restart Quiz");
-    $(".wrapper").removeClass("opacity-0");
+    $(".wrapper .container:first").removeClass("opacity-0");
 
     // When Restart Quiz button is clicked it reloads the page
     $(this).click(function() {
