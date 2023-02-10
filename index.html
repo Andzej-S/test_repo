@@ -34,7 +34,7 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#" id="home" role="button">Home</a>
+              <a class="nav-link" aria-current="page" href="#" id="home" role="button">Home</a>
             </li>
             <li class="nav-item mx-5">
               <a class="nav-link" id="highscores" role="button">Highscores</a>
@@ -46,7 +46,7 @@
         </div>
       </div>
     </nav>  
-    <div class="container">
+    <div id="hero" class="container">
       <div class="row py-4 py-lg-6">
         <div class="col-lg-4 order-lg-2 d-flex align-items-center justify-content-center justify-content-lg-start ms-lg-n6">
           <div style="z-index:1" class="lc-block col-6 col-lg-10 mb-n3 mb-lg-0">
@@ -57,16 +57,16 @@
           <div class="col-lg-10 ms-lg-5">
             <div class="lc-block mb-4">
               <div editable="rich">
-                <h1 class="rfs-30">Welcome to Quiz Hero</h1>
+                <h1 class="rfs-30"><em>Welcome to Quiz Hero</em></h1>
               </div>
             </div>
             <div class="lc-block mb-5">
               <div editable="rich">
-                <p class="lead"> Test your knowledge with our free quiz. Pick a category & difficulty and fire up some questions! Good luck! </p>
+                <h6 class="lead text-light"><em>Test your knowledge with our free quiz. Pick a category & difficulty and fire up some questions! Good luck!</em>  </h6>
               </div>
             </div><!-- /lc-block -->
             <div class="lc-block">
-              <a class="btn btn-primary btn-lg" href="#play-button" id="startBtn" role="button">Let's start</a>
+              <a class="btn btn-primary btn-lg hints" href="#play-button" id="startBtn" role="button">Let's start</a>
             </div><!-- /lc-block -->
           </div>
         </div><!-- /col -->
@@ -76,15 +76,15 @@
   </header>
 
   <!-- MAIN SECTION -->
-  <div class ="wrapper opacity-0">
+  <div class ="wrapper">
 
     <!-- Container that holds category, difficulty level and play button -->
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-center align-items-center">
         
         <!--Column that holds category dropdown -->
-        <div class="col col-lg-4">
-          <select class="form-select"   id="category" aria-label="Default select example">
+        <div class="col col-lg-4 col-md-4 col-sm-4 px-2">
+          <select class="form-select" id="category" aria-label="Default select example">
             <option selected>Category</option>  
             <option value="history">History</option>
             <option value="science">Science</option>
@@ -95,7 +95,7 @@
         </div>
         
         <!--Column that holds difficulty dropdown -->
-        <div class="col col-lg-4">
+        <div class="col col-lg-4 col-md-4 col-sm-4 px-2">
           <select class="form-select" id="difficulty" aria-label="Default select example">
             <option selected>Difficulty level</option>
             <option value="easy">Easy</option>
@@ -103,77 +103,77 @@
             <option value="hard">Hard</option>
           </select>
         </div>
-        
+
         <!-- Play button -->
-        <div class="col col-lg-4 text-center">
-          <button type="button" id="play-button" class="btn btn-primary" class="main">Play!</button>
+        <div class="col col-lg-4 col-md-4 col-sm-4 px-2 text-center">
+          <a role="button" href="#mainQuiz" id="play-button" class="btn btn-primary" class="main ">Play!</a>
         </div>
+        
       </div>
     </div>
     <!-- End of container that holds category, difficulty level and play button -->
 
-
     <!-- Container that holds quiz and hint buttons -->
     <div class="container opacity-0" id="mainQuiz">
+      <!-- QUESTION CONTAINER -->
       <div class="row">
-        <div class="col col-lg-8">
+        <div class="col col-lg-12 col-sm-12 my-20">
 
           <!-- Question to be displayed here -->
-          <h3 id="question-title"></h3>
-        </div>
-        <div class="col col-lg-4 text-center">
-          <h3>Lifeline</h3>
-        </div>
+          <h3 id="question-title" class="align-items-center"></h3>
+        </div>        
       </div>
 
-      <div class="row">
-        <div class="col col-lg-8">
+      <!-- ANSWERS CONTAINER -->
+      <div id="choices">
+        <!-- <div class="col my-20"> -->
           <!-- Choices to be displayed here -->
-          <div class="choices" id="choices"></div>
-        </div>
-
-        <!-- Hint buttons -->
-        <div class="col col-lg-4 justify-content-center align-items-center d-flex hints">
-          <button type="button" id ="hint" class="main btn btn-primary">Hint</button>
-          <button type="button" id ="fifty-fifty" class="main btn btn-primary">50/50</button>
-        </div>
+          
+        <!-- </div> -->
       </div>
 
-    </div>
+      <!-- BUTTONS CONTAINER -->
+      <div class="container ">
+        
+        <div class="row">    
+          <!-- lifelines -->  
+          <div class="col col-6 lifeline text-center ">
+            <div>
+              <h4>Lifelines</h4>
+            </div>
+            <div id="btnGroup">
+              <button type="button" id ="hint" class="main btn btn-primary">Hint</button>
+              <button type="button" id ="fifty-fifty" class="main btn btn-primary">50/50</button> 
+            </div>
+          </div>
+          
+          <!-- info -->
+          <div class="col lifeline">            
+            <div>
+              <h4>Info</h4>
+            </div>
+        
+            <div class="text-center d-flex py-3 ">
+              <div class="d-flex">
+                <p >LIVES ::   </p>
+                <h5  id="lives"></h5>
+              </div>
+              <div class="d-flex">
+                <p class="">LEVEL ::   </p>
+                <h5  id="score"></h5>
+              </div>           
+            </div>              
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>       
     <!-- End of container that holds quiz and hint buttons -->
-    
 
-    <!-- Container that holds wins, losses, win ratio and next button -->
-    <div class="container opacity-0">
-      <div class="row text-center">
-        <div class="col col-lg-4">
-          <!-- Empty div -->
-        </div>
-        <div class="col col-lg-4 d-flex">
-
-          <!-- Span holds lives and score -->
-          <p class="mx-5">Lives<span id="lives" class="lives"></span></p>
-          <p class="mx-5">Level<span id="score" class="score"></span></p>
-        </div>
-        
-        <div class="col col-lg-4">
-          <!-- Empty div -->
-        </div>
-        
-      </div>
-    </div>
-    <!-- End of container that holds wins, losses, win ratio and next button -->
-    
   </div>
   <!-- END OF MAIN SECTION -->
-
-  <!-- Submit -->
-  <div>
-    <p class="d-none" id="submitInitials">
-      Enter initials: <input type="text" id="initials" max="99"/>
-      <button id="submit">Submit</button>
-    </p>
-  </div>
 
 
   <!-- MODALS -->
@@ -224,40 +224,54 @@
   <!-- END OF MODALS -->
 
 
-  <!-- FOOTER SECTION -->
-  <div class="footer d-flex">
+  <div>
+    <p class="d-none" id="submitInitials">
+      Enter initials: <input type="text" id="initials" max="99"/>
+      <button id="submit">Submit</button>
+    </p>
+  </div>
 
-    <!-- About us div -->
-    <div class="col col-md-4 col-sm-4 about-us">
-      <h3>About Us</h3>
-      <p>This is a joint quiz application that was inspired by "Who wants to be a Millionnaire" show. We wanted to re-create the excitement of challenging yourself to progressively harder questions without leaving the comfort of your own home.</p>
-      <div class="copyright">
-        <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Team 4</p>
+
+  <!-- FOOTER SECTION -->
+  <div class="footer flex-column">
+    <div class="row">
+      <!-- About us div -->
+      <div class="col about-us">
+        <h3>About Us</h3>
+        <blockquote   class="p-2 font-monospace">This is a joint quiz application that was inspired by "Who wants to be a Millionnaire" show. We wanted to re-create the excitement of challenging yourself to progressively harder questions without leaving the comfort of your own home.</blockquote>
+        
       </div>
+     </div>
+     <div class="row">
+      <div class="col contact">
+        <h3>Contact</h3>
+        <p>People who worked on this project:</p>
+        <div class="social-icons">
+          <a href="https://github.com/Andzej-S">
+          <i class="fa-brands fa-github-alt" style="font-size: 26px;"></i>
+          <P>Andzej</P>
+          </a>
+          <a href="https://github.com/DavidHJolley">
+          <i class="fa-brands fa-github-alt" style="font-size: 26px;"></i>
+          <P>David</P>
+          </a>
+          <a href="https://github.com/georgeboholteanu">
+          <i class="fa-brands fa-github-alt" style="font-size: 26px;"></i>
+          <P>George</P>
+          </a>
+          <a href="https://github.com/TahminaHannan">
+          <i class="fa-brands fa-github-alt" style="font-size: 26px;"></i>
+          <P>Tahmina</P>
+          </a>
+      </div>
+     </div>
+     <div class="copyright">
+      <p>Copyright &copy; <script>document.write(new Date().getFullYear());</script> Team 4</p>
+    </div> 
+      
     </div>
-    
-    <!-- Contact div -->
-    <div class="col col-md-4 col-sm-4 contact">
-      <h3>Contact</h3>
-      <p>People who worked on this project:</p>
-      <div class="social-icons">
-        <a href="https://github.com/Andzej-S">
-        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
-        <P>Andzej</P>
-        </a>
-        <a href="https://github.com/DavidHJolley">
-        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
-        <P>David</P>
-        </a>
-        <a href="https://github.com/georgeboholteanu">
-        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
-        <P>George</P>
-        </a>
-        <a href="https://github.com/TahminaHannan">
-        <i class="fa-brands fa-github-alt" style="font-size: 32px;"></i>
-        <P>Tahmina</P>
-        </a>
-    </div>
+
+  
   </div>
   <!-- END OF FOOTER SECTION -->
 
