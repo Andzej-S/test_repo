@@ -1,325 +1,147 @@
+/* START OF GLOBAL RESET AND RULES */
 * {
     margin: 0;
     padding: 0;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     box-sizing: border-box;
-}
-
-.shadow {
-    box-shadow: none!important;   
-}
-
-html {
     scroll-behavior: smooth;
 }
+/* END OF GLOBAL RESET AND RULES */
 
 
-.nav-item { 
-        z-index: 200;      
-    
-    }
-    .nav-link:hover {
-        transform: scale(1.0);
-    }
-    #home:hover{
-        transform: scale(1.0);
-    }
-
-.navbar{
-    padding-top: 15px;
-    width: 100%;
-    background: rgb(7, 1, 35);
-    font-size: large;
-    
-    }
-
-.navbar-toggler{
-    padding-top: 1%;
-    display: inline-block;
-}
-
-
-
-
-/* shifted the quiz image to the right -TH */
-.col-lg-7 {
-    flex: 0 0 auto;
-    width: 66.333333%;
-}
-
-
-
-
+/* START OF ELEMENT OR WIDESPREAD TARGETING */
 /* This will fill all the middle section of the main page, between navbar and footer -TH*/
 body {
     background: rgb(2,0,36);
     background: linear-gradient(90deg, rgba(2,0,36,1) 20%, rgba(48,7,75,1) 40%, rgba(32,9,60,1) 63%, rgba(10,10,96,1) 86%, rgba(56,8,62,1) 100%);
-  }
-
-.bg-light{
-    --bs-bg-opacity: 0;
-    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
 }
 
-
-
-
-.fa-bars{
-    color:white;
+h1,
+h3,
+h4,
+h6 {
+    color: orange;
+    text-align: center;
+    letter-spacing: 1px;
 }
 
-.choices {
-    /* display: flex; */
-    justify-content: center;
-    align-items: center;
-  }
-  
-.choices button {
-    border: solid;
-    padding: 2%;
-    border-radius: 15px;
-    border-width: 1px;
-    color: white;
-    border-color: rgb(198, 124, 5);
-    background-color: rgba(128, 128, 128, 0.466);
-    min-width: 10%;
-    max-width: 20%;
-    margin: 20px;
-    align-items: center;
+option {
+    border: 1px solid #fff;
+    background-color: #000000;
 }
 
-.choices button:hover {
-    box-shadow: 0 0 5px #ffc000, 0 0 20px #ffc000, 0 0 60px #ffc000, 0 0 150px #ffc000;
-    background-color: #ffc000;
-    outline: none;
+.container {
+    margin-top: 20px;  
+    padding: 10px;
+}
+/* END OF ELEMENT OR WIDESPREAD TARGETING */
+
+
+/* START OF NAVIGATION SECTION */
+.navbar {
+    padding-top: 15px;
+    width: 100%;
+    background: rgb(7, 1, 35);
+    font-size: large;
 }
 
-.nav-link {
-    display: block;
-    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
-    font-size: var(--bs-nav-link-font-size);
-    font-weight: var(--bs-nav-link-font-weight);
-    color: rgb(235, 153, 59);
-    text-decoration: none;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+.navbar-toggler {
+    padding-top: 1%;
+    display: inline-block;
 }
 
-.nav-item{
+.nav-item { 
+    z-index: 200;      
     border-radius: 2px;
     border-width: 1px;
 }
 
-.nav-link:hover {
+/* Burger icon */
+.fa-bars {
+    color:rgb(235, 153, 59);
+}
+
+#home,
+#highscores,
+#help {
+    color: rgb(235, 153, 59);
+}
+
+#home:hover,
+#highscores:hover,
+#help:hover {
     transform: scale(1.1);
     color: white;
     transition: all .2s ease-in-out;
 }
+/* END OF NAVIGATION SECTION */
 
-#home:hover{
-    transform: scale(1.1);
-}
-  
-.container {
-    color: orange;
-    align-content: center;
-    width: 100%;
-    margin-top: 20px;  
-    padding: 10px;
-    }
-        
 
+/* START OF HERO BANNER IMAGE */
+/* Hero image "Quiz!" */
 .img-fluid {
-    width: 100%;
+    box-shadow: none;
 }
 
-h3 {
-    color: orange;
-    text-align: center;
-}
-
-#question-title {
-    border-style: transparent;
-    border-width: 1px;
-    min-height: 2.5rem;
-    text-align: center;
-}
-
-.hints {
-    border-width: 1px;
-    gap: 4%;
-}
-
-.hints button {
-    width: 180px;
-    height: 90px;
-    text-align: center;
-    margin: 2px auto;
-    border: 1px solid #ce9f11;
-    font-size: 20px;
-    transition: 0.3s ease;
-    outline: none;
-}
-
-.hints button:hover {
-box-shadow: 0 0 5px #ffc000, 0 0 20px #ffc000, 0 0 60px #ffc000, 0 0 150px #ffc000;
-background-color: #ffc000;
-outline: none;
-}
-
-.lifeline {
-    border-width: 1px;
-    /* gap: 4%; */
-}
-
-.lifeline button {
-    width: 100;
-    height: 30;
-    text-align: center;
-    margin: 5px auto;
-    border: 1px solid #ce9f11;
-    font-size: 20px;
-    transition: 0.3s ease;
-    outline: none;
-  }
-
-.lifeline button:hover {
-box-shadow: 0 0 5px #ffc000, 0 0 20px #ffc000, 0 0 60px #ffc000, 0 0 150px #ffc000;
-background-color: #ffc000;
-outline: none;
-}
+/* Shifted the quiz image to the right -TH */
+/* .col-lg-7 {
+    flex: 0 0 auto;
+    width: 66.333333%;
+} */
+/* END OF HERO BANNER */
 
 
-
-.btn-primary {
-    --bs-btn-color: #fff;
-    --bs-btn-bg: rgb(29, 29, 41);
-    --bs-btn-border-color: none;
-}
-
+/* START OF QUIZ SECTION */
+/* Changes Category and Difficulty level look */
 .form-select{
     background-color: transparent;
     color: white;
 }
 
-option{
-    border: 1px solid #fff;
-    background-color: #000000;
+/* Changes to paragraph of lives, level and initials */
+.lives-level-initials {
+    color: rgb(235, 153, 59);
+    text-align: center;
 }
 
-.main {
-    width: 150px;
-    margin-bottom: 10px;
+.quiz-text-center {
+    display: flex;
+    align-items: center;
     justify-content: center;
 }
 
+/* Changes score and lives numbers display */
 #score,
 #lives {
-
-    border-width: 1px;
-    height: 1.7rem;
     width: 5rem;
-    display: inline-block;
-    vertical-align: middle;
     color: white;
-    font-weight: bold;
-  }
-
-.lives,
-.score {
-    color: white;
-    margin-bottom: 10px;
-    margin-top: 4px;
-    width: 90px;
-    height: 40px;
-    font-weight: bold;
-
 }
-  
-/* Submitting your initials after completing the quiz -TH */
-#submitInitials {
-    text-align: center;
-    width: 100%;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding-top: 280px;
-    text-align: center;
-    color: orange;
-  }
-
-  button#submit {
-    width: 85px;
-    height: 29px;
-    border-radius: 10px;
-  }
+/* END OF QUIZ SECTION */
 
 
-/* FOOTER SECTION*/
-
-.footer {
-    margin-top: 12.5rem;
-    width: 100%;
-    background: rgb(7, 1, 35);
-    color: white;
-    justify-content: space-between;
-    padding: 0.4rem;
-    
+/* START OF BUTTONS SECTIONS */
+.btn-primary {
+    min-width: 150px;
+    --bs-btn-bg: rgb(29, 29, 41);
+    border: 1px solid #ce9f11;
+    margin: 5px auto;
+    font-size: 1em;
 }
 
-.footer div {
-    text-align: center;
+.btn-primary:hover {
+    box-shadow: 0 0 5px #ffc000, 0 0 20px #ffc000, 0 0 60px #ffc000, 0 0 150px #ffc000;
+    background-color: #ffc000;
+    outline: none;
 }
 
-.copyright {
-    margin-top: 20px;
+/* Highscores modal button */
+#resetScores:hover{
+    color:#f8c245
 }
-
-.footer div h3 {
-    font-weight: 200;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-}
+/* END OF BUTTONS SECTION */
 
 
-.social-icons {
-    margin-top: 20px;
-    size: 50%;
-     
-}
-
-.social-icons i {
-    font-size: 22px;
-    margin: 10px;
-    cursor:pointer;
-}
-
-.social-icons{
-    display: flex;
-    justify-content: center;
-    align-items:center;
-    margin: auto;
-    width: 50%;
-    gap: 5%;
-    max-width: 50%;
-}
-
-.footer p {
-   font-size: smaller;
-   color: grey;
-   display: inline;
-}
-
-.about-us,
-.contact {
-    width: 100%;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
-
-/* END OF FOOTER SECTION */
-
-/* MODALS */
+/* START OF MODALS SECTION */
 .ui-dialog .ui-dialog-titlebar{
     text-align: center;
     max-width:100%;
@@ -349,15 +171,11 @@ option{
     background-color: grey;
 }
 
-#resetScores:hover{
-    color:#f8c245
-}
-
 .tooltip {
     position: relative;
     display: inline-block;
     border-bottom: 1px dotted black;
-  }
+}
 
 .tooltip {
 position: relative;
@@ -376,57 +194,106 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
   
     /* Position the tooltip */
     position: absolute;
-    z-index: 1;
-      
+    z-index: 1;   
 }
+
 .tooltip:hover tooltiptext{
     visibility: visible;
 }
+/* END OF MODALS SECTION */
 
 
+/* START OF FOOTER SECTION*/
+.footer {
+    margin-top: 12.5rem;
+    width: 100%;
+    background: rgb(7, 1, 35);
+    color: white;
+    justify-content: space-between;
+    padding: 0.4rem;
+}
 
-/* MEDIA QUERIES */
+.footer div {
+    text-align: center;
+}
 
+.footer blockquote {
+    font-size: smaller;
+    color: grey;
+    display: inline;
+    font-size: 1.0rem;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    margin: auto;
+    width: 50%;
+    gap: 5%;
+    font-size: 1.2rem;
+    cursor:pointer;
+}
+
+.about-us,
+.contact {
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.copyright {
+    margin-top: 20px;
+}
+/* END OF FOOTER SECTION */
+
+
+/* START OF MEDIA QUERIES */
 @media only screen and (max-width: 576px) {
     .mx-5 {
         margin-right: 0!important;
         margin-left: 0!important;
     }
+    .container {
+        flex-direction: column;
+      }
+      .row {
+        flex-direction: column;
+      }
+      .hints {
+        width: 100%;
+        text-align: center;
+    }
     .container-fluid {
         margin-left: 20px;
     }
-    
     .navbar-collapse {
         margin-top: 20px;        
     }
-   
     .nav-link {
         margin-left: 20px;
     }
-
-    #home:hover{
-        transform: scale(1.0);
-    }
-    .lifeline {
-        padding-top: 10px;        
-    }
-    #btnGroup {
-        display: inline-flex;   
+    .lc-block{
+        display: flex;
+        align-items: center;
+        justify-content: center; 
     }
     .footer {
         margin-top: 5rem;
     }
-
-
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .footer {
       flex-direction: column;
       align-items: center;
       margin-top: 5rem;
     }
-   
+    .lc-block{
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+    }
 }
 
 @media only screen and (max-width: 960px) {
@@ -434,14 +301,11 @@ border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
         margin-right: 0!important;
         margin-left: 0!important;
     }
-      
     .navbar-collapse {
         margin-top: 20px;        
-    }
-    .nav-link:hover {
-        transform: scale(1.0);
     }
     .nav-link {
         margin-left: 20px;
     }
 }
+/* END OF MEDIA QUERIES */

@@ -50,10 +50,10 @@
       <div class="row py-4 py-lg-6">
         <div class="col-lg-4 order-lg-2 d-flex align-items-center justify-content-center justify-content-lg-start ms-lg-n6">
           <div style="z-index:1" class="lc-block col-6 col-lg-10 mb-n3 mb-lg-0">
-            <img class="img-fluid shadow" src="./assets/images/quiz.png" alt="Quiz Image">
+            <img class="img-fluid" src="./assets/images/quiz.png" alt="Quiz Image">
           </div><!-- /lc-block -->
         </div><!-- /col -->
-        <div class="col-lg-7 bg-light px-lg-5 p-4">
+        <div class="col-lg-7 px-lg-5 p-4">
           <div class="col-lg-10 ms-lg-5">
             <div class="lc-block mb-4">
               <div editable="rich">
@@ -66,7 +66,7 @@
               </div>
             </div><!-- /lc-block -->
             <div class="lc-block">
-              <a class="btn btn-primary btn-lg hints" href="#play-button" id="startBtn" role="button">Let's start</a>
+              <a class="btn btn-primary" href="#play-button" id="startBtn" role="button">Let's start</a>
             </div><!-- /lc-block -->
           </div>
         </div><!-- /col -->
@@ -106,7 +106,7 @@
 
         <!-- Play button -->
         <div class="col col-lg-4 col-md-4 col-sm-4 px-2 text-center">
-          <a role="button" href="#mainQuiz" id="play-button" class="btn btn-primary" class="main ">Play!</a>
+          <a role="button" href="#mainQuiz" id="play-button" class=" main btn btn-primary">Play!</a>
         </div>
         
       </div>
@@ -137,29 +137,29 @@
         
         <div class="row">    
           <!-- lifelines -->  
-          <div class="col col-6 lifeline text-center ">
+          <div class="col">
             <div>
               <h4>Lifelines</h4>
             </div>
-            <div id="btnGroup">
+            <div class="quiz-text-center" id="btnGroup">
               <button type="button" id ="hint" class="main btn btn-primary">Hint</button>
               <button type="button" id ="fifty-fifty" class="main btn btn-primary">50/50</button> 
             </div>
           </div>
           
           <!-- info -->
-          <div class="col lifeline">            
+          <div class="col">            
             <div>
               <h4>Info</h4>
             </div>
         
-            <div class="text-center d-flex py-3 ">
+            <div class="quiz-text-center py-3">
               <div class="d-flex">
-                <p >LIVES ::   </p>
+                <p class="lives-level-initials" >LIVES ::   </p>
                 <h5  id="lives"></h5>
               </div>
               <div class="d-flex">
-                <p class="">LEVEL ::   </p>
+                <p class="lives-level-initials">LEVEL ::   </p>
                 <h5  id="score"></h5>
               </div>           
             </div>              
@@ -225,9 +225,9 @@
 
 
   <div>
-    <p class="d-none" id="submitInitials">
+    <p class="d-none lives-level-initials" id="submitInitials">
       Enter initials: <input type="text" id="initials" max="99"/>
-      <button id="submit">Submit</button>
+      <button class="btn btn-primary" id="submit">Submit</button>
     </p>
   </div>
 
